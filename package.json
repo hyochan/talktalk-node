@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node babel-node src/index.js",
+    "start": "npx babel-node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prisma:deploy": "PRISMA_MANAGEMENT_API_SECRET=dooboolab-secret-123 prisma deploy"
   },

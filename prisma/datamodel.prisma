@@ -1,4 +1,10 @@
 type User {
   id: ID! @unique
-  name: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+
+  email: String! @unique
+  name: String
+  photoUrl: String
+  description: String
 }

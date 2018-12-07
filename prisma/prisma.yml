@@ -1,7 +1,11 @@
 endpoint: http://localhost:4466
 datamodel: datamodel.prisma
-secret: dooboolab-secret-123
+# secret: dooboolab-secret-123
 
 generate:
-  - generator: flow-client
-    output: ./generated/prisma-client/
+    - generator: flow-client
+      output: ./generated/prisma-client
+
+hooks:
+  post-deploy:
+    - graphql get-schema -p prisma
