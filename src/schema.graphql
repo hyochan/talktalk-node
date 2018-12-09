@@ -1,9 +1,10 @@
 # import User from './generated/prisma.graphql'
+# import AuthPayload from './generated/prisma.graphql'
 
 type Query{
-    user(id: ID!): User
+  user(id: ID!): User
 }
 
 type Mutation {
-    signup(email: String!) : User!
+  signup(email: String!) : AuthPayload!
 }

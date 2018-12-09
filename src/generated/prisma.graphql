@@ -1,8 +1,151 @@
 # source: http://localhost:4466
-# timestamp: Fri Dec 07 2018 21:26:24 GMT+0900 (Korean Standard Time)
+# timestamp: Sun Dec 09 2018 01:48:41 GMT+0900 (Korean Standard Time)
+
+type AggregateAuthPayload {
+  count: Int!
+}
 
 type AggregateUser {
   count: Int!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+"""A connection to a list of items."""
+type AuthPayloadConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [AuthPayloadEdge]!
+  aggregate: AggregateAuthPayload!
+}
+
+input AuthPayloadCreateInput {
+  token: String!
+  user: UserCreateOneInput!
+}
+
+"""An edge in a connection."""
+type AuthPayloadEdge {
+  """The item at the end of the edge."""
+  node: AuthPayload!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum AuthPayloadOrderByInput {
+  token_ASC
+  token_DESC
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type AuthPayloadPreviousValues {
+  token: String!
+}
+
+type AuthPayloadSubscriptionPayload {
+  mutation: MutationType!
+  node: AuthPayload
+  updatedFields: [String!]
+  previousValues: AuthPayloadPreviousValues
+}
+
+input AuthPayloadSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AuthPayloadSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AuthPayloadSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AuthPayloadSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: AuthPayloadWhereInput
+}
+
+input AuthPayloadUpdateManyMutationInput {
+  token: String
+}
+
+input AuthPayloadWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AuthPayloadWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AuthPayloadWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AuthPayloadWhereInput!]
+  token: String
+
+  """All values that are not equal to given value."""
+  token_not: String
+
+  """All values that are contained in given list."""
+  token_in: [String!]
+
+  """All values that are not contained in given list."""
+  token_not_in: [String!]
+
+  """All values less than the given value."""
+  token_lt: String
+
+  """All values less than or equal the given value."""
+  token_lte: String
+
+  """All values greater than the given value."""
+  token_gt: String
+
+  """All values greater than or equal the given value."""
+  token_gte: String
+
+  """All values containing the given string."""
+  token_contains: String
+
+  """All values not containing the given string."""
+  token_not_contains: String
+
+  """All values starting with the given string."""
+  token_starts_with: String
+
+  """All values not starting with the given string."""
+  token_not_starts_with: String
+
+  """All values ending with the given string."""
+  token_ends_with: String
+
+  """All values not ending with the given string."""
+  token_not_ends_with: String
+  user: UserWhereInput
 }
 
 type BatchPayload {
@@ -22,11 +165,14 @@ Long can represent values between -(2^63) and 2^63 - 1.
 scalar Long
 
 type Mutation {
+  createAuthPayload(data: AuthPayloadCreateInput!): AuthPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   deleteUser(where: UserWhereUniqueInput!): User
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  updateManyAuthPayloads(data: AuthPayloadUpdateManyMutationInput!, where: AuthPayloadWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  deleteManyAuthPayloads(where: AuthPayloadWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   executeRaw(database: PrismaDatabase, query: String!): Json!
 }
@@ -63,8 +209,10 @@ enum PrismaDatabase {
 }
 
 type Query {
+  authPayloads(where: AuthPayloadWhereInput, orderBy: AuthPayloadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AuthPayload]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   user(where: UserWhereUniqueInput!): User
+  authPayloadsConnection(where: AuthPayloadWhereInput, orderBy: AuthPayloadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AuthPayloadConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
 
   """Fetches an object given its ID"""
@@ -75,17 +223,18 @@ type Query {
 }
 
 type Subscription {
+  authPayload(where: AuthPayloadSubscriptionWhereInput): AuthPayloadSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
 type User implements Node {
   id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
   email: String!
   name: String
   photoUrl: String
   description: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -105,6 +254,11 @@ input UserCreateInput {
   description: String
 }
 
+input UserCreateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+}
+
 """An edge in a connection."""
 type UserEdge {
   """The item at the end of the edge."""
@@ -117,10 +271,6 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
   email_ASC
   email_DESC
   name_ASC
@@ -129,16 +279,20 @@ enum UserOrderByInput {
   photoUrl_DESC
   description_ASC
   description_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
 }
 
 type UserPreviousValues {
   id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
   email: String!
   name: String
   photoUrl: String
   description: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type UserSubscriptionPayload {
@@ -243,50 +397,6 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
   email: String
 
   """All values that are not equal to given value."""
@@ -447,6 +557,50 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
 }
 
 input UserWhereUniqueInput {

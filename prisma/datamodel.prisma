@@ -1,10 +1,14 @@
 type User {
   id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-
   email: String! @unique
   name: String
   photoUrl: String
   description: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
 }

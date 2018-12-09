@@ -18,7 +18,6 @@ const getUserId = (context) => {
   if (Authorization) {
     const token = Authorization.replace('Bearer ', '');
     const { userId } = jwt.verify(token, SECRET);
-    console.log('userId: ' + userId);
     return userId;
   }
   throw new Error('no valid user');
@@ -27,11 +26,7 @@ const getUserId = (context) => {
 const resolvers = {
   Query: {
     user: async (_, args, context, info) => {
-      console.log("token: " + context.request.user);
       const userId = getUserId(context);
-      const hasPermission = await context.prisma.exists
-      console.log('userId: ' + userId);
-      console.log('hasPermission' + hasPermission);
       return context.prisma.query.user(
         {
           where: {
@@ -44,18 +39,14 @@ const resolvers = {
   },
   Mutation: {
     signup: async (_, args, context, info) => {
-    //   const token  = jwt.sign({ userId: args.id }, SECRET);
-    //   console.log('token: ' + token);
-      return context.prisma.mutation.createUser(
-        {
-          data: {
-            email: args.email,
-          },
-        },
-        info,
-      );
-    //   console.log('msg', msg);
-    //   return msg;
+      const user = await context.prisma.mutation.createUser({
+        data: args,
+      });
+      console.log('user', user);
+      const token  = jwt.sign({ userId: user.id }, SECRET);
+      return {
+        user,
+      };
     }
   },
   Node: {
