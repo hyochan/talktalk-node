@@ -25,7 +25,7 @@ const Mutation = {
       },
     );
   },
-  deleteFriend: (_, { friendEmail }, context, info) => {
+  removeFriend: (_, { friendEmail }, context, info) => {
     /// TODO:
   },
 };
