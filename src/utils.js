@@ -4,7 +4,7 @@ const APP_SECRET = 'REACT NATIVE SEOUL - DOOBOOLAB';
 
 class AuthError extends Error {
   constructor() {
-    super('Not authorized')
+    super('Not authorized');
   }
 }
 

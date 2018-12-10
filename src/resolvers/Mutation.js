@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { getUserId, APP_SECRET } from '../utils';
 
 const Mutation = {
-  signup: async (_, args, context, info) => {
+  signup: async(_, args, context, info) => {
     const user = await context.prisma.mutation.createUser(
       {
         data: args,
@@ -10,7 +10,7 @@ const Mutation = {
       // info
     );
     console.log('user', user);
-    const token  = jwt.sign({ userId: user.id }, APP_SECRET);
+    const token = jwt.sign({ userId: user.id }, APP_SECRET);
     return {
       token,
       user,
@@ -21,13 +21,13 @@ const Mutation = {
     return context.prisma.mutation.updateUser(
       {
         where: { id: userId },
-        data: { friends: { connect: { email: friendEmail }}},
+        data: { friends: { connect: { email: friendEmail } } },
       },
     );
   },
   deleteFriend: (_, { friendEmail }, context, info) => {
     /// TODO:
-  }
+  },
 };
 
 export default Mutation;

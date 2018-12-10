@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npx babel-node src/index.js",
+    "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prisma:deploy": "PRISMA_MANAGEMENT_API_SECRET=dooboolab-secret-123 prisma deploy"
   },
@@ -26,6 +27,13 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-syntax-import-meta": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
-    "@babel/preset-stage-3": "^7.0.0"
+    "@babel/preset-stage-3": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.10.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0"
   }
 }
