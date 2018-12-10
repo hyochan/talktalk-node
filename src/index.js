@@ -1,11 +1,10 @@
-// const jwt = require('express-jwt');
-import jwt from 'jsonwebtoken';
-
 // src/index.js
 import { GraphQLServer } from 'graphql-yoga';
 import { Prisma } from 'prisma-binding';
 
-const SECRET = 'REACT NATIVE SEOUL - DOOBOOLAB';
+import Query from './resolvers/Query';
+import Mutation from './resolvers/Mutation';
+import Node from './resolvers/Node';
 
 const db = new Prisma({
   typeDefs: 'src/generated/prisma.graphql',
@@ -13,59 +12,10 @@ const db = new Prisma({
   debug: true,
 });
 
-const getUserId = (context) => {
-  const Authorization = context.request.get('Authorization');
-  if (Authorization) {
-    const token = Authorization.replace('Bearer ', '');
-    const { userId } = jwt.verify(token, SECRET);
-    return userId;
-  }
-  throw new Error('no valid user');
-};
-
 const resolvers = {
-  Query: {
-    user: (_, args, context, info) => {
-      const userId = getUserId(context);
-      return context.prisma.query.user(
-        {
-          where: {
-            id: args.id,
-          },
-        },
-        info
-      )
-    }
-  },
-  Mutation: {
-    signup: async (_, args, context, info) => {
-      const user = await context.prisma.mutation.createUser(
-        {
-          data: args,
-        },
-        // info
-      );
-      console.log('user', user);
-      const token  = jwt.sign({ userId: user.id }, SECRET);
-      return {
-        token,
-        user,
-      };
-    },
-    addFriend: (_, args, context, info) => {
-      const userId = getUserId(context);
-      return context.prisma.mutation.updateUser(
-        {
-          data: args,
-        },
-      );
-    }
-  },
-  Node: {
-    __resolveType() {
-      return null;
-    }
-  },
+  Query,
+  Mutation,
+  Node,
 };
 
 const server = new GraphQLServer({
