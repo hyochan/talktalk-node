@@ -16,6 +16,7 @@ type NodePromise = Promise<Node>;
 type AtLeastOne<T> = $Shape<T>;
 
 export interface Exists {
+  authPayload(where?: AuthPayloadWhereInput): Promise<boolean>;
   user(where?: UserWhereInput): Promise<boolean>;
 }
 
@@ -38,6 +39,24 @@ interface PrismaInterface {
    * Queries
    */
 
+  authPayloads: (args?: {
+    where?: AuthPayloadWhereInput,
+    orderBy?: AuthPayloadOrderByInput,
+    skip?: Int,
+    after?: String,
+    before?: String,
+    first?: Int,
+    last?: Int
+  }) => FragmentableArray<AuthPayload>;
+  authPayloadsConnection: (args?: {
+    where?: AuthPayloadWhereInput,
+    orderBy?: AuthPayloadOrderByInput,
+    skip?: Int,
+    after?: String,
+    before?: String,
+    first?: Int,
+    last?: Int
+  }) => AuthPayloadConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserPromise;
   users: (args?: {
     where?: UserWhereInput,
@@ -63,6 +82,14 @@ interface PrismaInterface {
    * Mutations
    */
 
+  createAuthPayload: (data: AuthPayloadCreateInput) => AuthPayloadPromise;
+  updateManyAuthPayloads: (args: {
+    data: AuthPayloadUpdateManyMutationInput,
+    where?: AuthPayloadWhereInput
+  }) => BatchPayloadPromise;
+  deleteManyAuthPayloads: (
+    where?: AuthPayloadWhereInput
+  ) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (args: {
     data: UserUpdateInput,
@@ -88,6 +115,9 @@ interface PrismaInterface {
 }
 
 export interface Subscription {
+  authPayload: (
+    where?: AuthPayloadSubscriptionWhereInput
+  ) => AuthPayloadSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -99,13 +129,19 @@ export type ClientConstructor<T> = (options?: BPOType) => T;
  * Types
  */
 
-export type UserOrderByInput =
+export type AuthPayloadOrderByInput =
+  | "token_ASC"
+  | "token_DESC"
   | "id_ASC"
   | "id_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
-  | "updatedAt_DESC"
+  | "updatedAt_DESC";
+
+export type UserOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
   | "email_ASC"
   | "email_DESC"
   | "name_ASC"
@@ -113,22 +149,65 @@ export type UserOrderByInput =
   | "photoUrl_ASC"
   | "photoUrl_DESC"
   | "description_ASC"
-  | "description_DESC";
+  | "description_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface UserCreateInput {
-  email: String;
-  name?: String;
-  photoUrl?: String;
-  description?: String;
+export interface UserCreateOneInput {
+  create?: UserCreateInput;
+  connect?: UserWhereUniqueInput;
 }
 
-export interface UserUpdateInput {
+export interface AuthPayloadWhereInput {
+  token?: String;
+  token_not?: String;
+  token_in?: String[];
+  token_not_in?: String[];
+  token_lt?: String;
+  token_lte?: String;
+  token_gt?: String;
+  token_gte?: String;
+  token_contains?: String;
+  token_not_contains?: String;
+  token_starts_with?: String;
+  token_not_starts_with?: String;
+  token_ends_with?: String;
+  token_not_ends_with?: String;
+  user?: UserWhereInput;
+  AND?: AuthPayloadWhereInput[];
+  OR?: AuthPayloadWhereInput[];
+  NOT?: AuthPayloadWhereInput[];
+}
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: ID_Input,
+  email?: String
+}>;
+
+export interface UserCreateManyInput {
+  create?: UserCreateInput[];
+  connect?: UserWhereUniqueInput[];
+}
+
+export interface UserUpdateDataInput {
   email?: String;
   name?: String;
   photoUrl?: String;
   description?: String;
+  friends?: UserUpdateManyInput;
+}
+
+export interface AuthPayloadUpdateManyMutationInput {
+  token?: String;
+}
+
+export interface UserUpdateWithWhereUniqueNestedInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateDataInput;
 }
 
 export interface UserWhereInput {
@@ -146,22 +225,6 @@ export interface UserWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
-  createdAt?: DateTimeInput;
-  createdAt_not?: DateTimeInput;
-  createdAt_in?: DateTimeInput[];
-  createdAt_not_in?: DateTimeInput[];
-  createdAt_lt?: DateTimeInput;
-  createdAt_lte?: DateTimeInput;
-  createdAt_gt?: DateTimeInput;
-  createdAt_gte?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  updatedAt_not?: DateTimeInput;
-  updatedAt_in?: DateTimeInput[];
-  updatedAt_not_in?: DateTimeInput[];
-  updatedAt_lt?: DateTimeInput;
-  updatedAt_lte?: DateTimeInput;
-  updatedAt_gt?: DateTimeInput;
-  updatedAt_gte?: DateTimeInput;
   email?: String;
   email_not?: String;
   email_in?: String[];
@@ -218,9 +281,39 @@ export interface UserWhereInput {
   description_not_starts_with?: String;
   description_ends_with?: String;
   description_not_ends_with?: String;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[];
+  createdAt_not_in?: DateTimeInput[];
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[];
+  updatedAt_not_in?: DateTimeInput[];
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  friends_every?: UserWhereInput;
+  friends_some?: UserWhereInput;
+  friends_none?: UserWhereInput;
   AND?: UserWhereInput[];
   OR?: UserWhereInput[];
   NOT?: UserWhereInput[];
+}
+
+export interface UserUpdateManyInput {
+  create?: UserCreateInput[];
+  update?: UserUpdateWithWhereUniqueNestedInput[];
+  upsert?: UserUpsertWithWhereUniqueNestedInput[];
+  delete?: UserWhereUniqueInput[];
+  connect?: UserWhereUniqueInput[];
+  disconnect?: UserWhereUniqueInput[];
+  deleteMany?: UserScalarWhereInput[];
+  updateMany?: UserUpdateManyWithWhereNestedInput[];
 }
 
 export interface UserUpdateManyMutationInput {
@@ -228,6 +321,142 @@ export interface UserUpdateManyMutationInput {
   name?: String;
   photoUrl?: String;
   description?: String;
+}
+
+export interface UserUpdateManyWithWhereNestedInput {
+  where: UserScalarWhereInput;
+  data: UserUpdateManyDataInput;
+}
+
+export interface UserCreateInput {
+  email: String;
+  name?: String;
+  photoUrl?: String;
+  description?: String;
+  friends?: UserCreateManyInput;
+}
+
+export interface UserUpdateInput {
+  email?: String;
+  name?: String;
+  photoUrl?: String;
+  description?: String;
+  friends?: UserUpdateManyInput;
+}
+
+export interface AuthPayloadCreateInput {
+  token: String;
+  user: UserCreateOneInput;
+}
+
+export interface UserScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[];
+  id_not_in?: ID_Input[];
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  email?: String;
+  email_not?: String;
+  email_in?: String[];
+  email_not_in?: String[];
+  email_lt?: String;
+  email_lte?: String;
+  email_gt?: String;
+  email_gte?: String;
+  email_contains?: String;
+  email_not_contains?: String;
+  email_starts_with?: String;
+  email_not_starts_with?: String;
+  email_ends_with?: String;
+  email_not_ends_with?: String;
+  name?: String;
+  name_not?: String;
+  name_in?: String[];
+  name_not_in?: String[];
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  photoUrl?: String;
+  photoUrl_not?: String;
+  photoUrl_in?: String[];
+  photoUrl_not_in?: String[];
+  photoUrl_lt?: String;
+  photoUrl_lte?: String;
+  photoUrl_gt?: String;
+  photoUrl_gte?: String;
+  photoUrl_contains?: String;
+  photoUrl_not_contains?: String;
+  photoUrl_starts_with?: String;
+  photoUrl_not_starts_with?: String;
+  photoUrl_ends_with?: String;
+  photoUrl_not_ends_with?: String;
+  description?: String;
+  description_not?: String;
+  description_in?: String[];
+  description_not_in?: String[];
+  description_lt?: String;
+  description_lte?: String;
+  description_gt?: String;
+  description_gte?: String;
+  description_contains?: String;
+  description_not_contains?: String;
+  description_starts_with?: String;
+  description_not_starts_with?: String;
+  description_ends_with?: String;
+  description_not_ends_with?: String;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[];
+  createdAt_not_in?: DateTimeInput[];
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[];
+  updatedAt_not_in?: DateTimeInput[];
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  AND?: UserScalarWhereInput[];
+  OR?: UserScalarWhereInput[];
+  NOT?: UserScalarWhereInput[];
+}
+
+export interface UserUpdateManyDataInput {
+  email?: String;
+  name?: String;
+  photoUrl?: String;
+  description?: String;
+}
+
+export interface AuthPayloadSubscriptionWhereInput {
+  mutation_in?: MutationType[];
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[];
+  updatedFields_contains_some?: String[];
+  node?: AuthPayloadWhereInput;
+  AND?: AuthPayloadSubscriptionWhereInput[];
+  OR?: AuthPayloadSubscriptionWhereInput[];
+  NOT?: AuthPayloadSubscriptionWhereInput[];
 }
 
 export interface UserSubscriptionWhereInput {
@@ -241,29 +470,89 @@ export interface UserSubscriptionWhereInput {
   NOT?: UserSubscriptionWhereInput[];
 }
 
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: ID_Input,
-  email?: String
-}>;
+export interface UserUpsertWithWhereUniqueNestedInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateDataInput;
+  create: UserCreateInput;
+}
 
 export interface NodeNode {
   id: ID_Output;
 }
 
-export interface UserEdge {
+export interface UserPreviousValues {
+  id: ID_Output;
+  email: String;
+  name?: String;
+  photoUrl?: String;
+  description?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface UserPreviousValuesPromise
+  extends Promise<UserPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  email: () => Promise<String>;
+  name: () => Promise<String>;
+  photoUrl: () => Promise<String>;
+  description: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface UserPreviousValuesSubscription
+  extends Promise<AsyncIterator<UserPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  email: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  photoUrl: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface AuthPayloadEdge {
   cursor: String;
 }
 
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T: UserPromise>() => T;
+export interface AuthPayloadEdgePromise
+  extends Promise<AuthPayloadEdge>,
+    Fragmentable {
+  node: <T: AuthPayloadPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
+export interface AuthPayloadEdgeSubscription
+  extends Promise<AsyncIterator<AuthPayloadEdge>>,
     Fragmentable {
-  node: <T: UserSubscription>() => T;
+  node: <T: AuthPayloadSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AuthPayloadSubscriptionPayload {
+  mutation: MutationType;
+  updatedFields?: String[];
+}
+
+export interface AuthPayloadSubscriptionPayloadPromise
+  extends Promise<AuthPayloadSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T: AuthPayloadPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T: AuthPayloadPreviousValuesPromise>() => T;
+}
+
+export interface AuthPayloadSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<AuthPayloadSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T: AuthPayloadSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T: AuthPayloadPreviousValuesSubscription>() => T;
 }
 
 export interface BatchPayload {
@@ -282,77 +571,104 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
+export interface AuthPayload {
+  token: String;
+}
+
+export interface AuthPayloadPromise extends Promise<AuthPayload>, Fragmentable {
+  token: () => Promise<String>;
+  user: <T: UserPromise>() => T;
+}
+
+export interface AuthPayloadSubscription
+  extends Promise<AsyncIterator<AuthPayload>>,
+    Fragmentable {
+  token: () => Promise<AsyncIterator<String>>;
+  user: <T: UserSubscription>() => T;
+}
+
 export interface User {
   id: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
   email: String;
   name?: String;
   photoUrl?: String;
   description?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
   email: () => Promise<String>;
   name: () => Promise<String>;
   photoUrl: () => Promise<String>;
   description: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  friends: <T: FragmentableArray<User>>(args?: {
+    where?: UserWhereInput,
+    orderBy?: UserOrderByInput,
+    skip?: Int,
+    after?: String,
+    before?: String,
+    first?: Int,
+    last?: Int
+  }) => T;
 }
 
 export interface UserSubscription
   extends Promise<AsyncIterator<User>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   email: () => Promise<AsyncIterator<String>>;
   name: () => Promise<AsyncIterator<String>>;
   photoUrl: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  friends: <T: Promise<AsyncIterator<UserSubscription>>>(args?: {
+    where?: UserWhereInput,
+    orderBy?: UserOrderByInput,
+    skip?: Int,
+    after?: String,
+    before?: String,
+    first?: Int,
+    last?: Int
+  }) => T;
 }
 
-export interface UserSubscriptionPayload {
-  mutation: MutationType;
-  updatedFields?: String[];
+export interface AuthPayloadPreviousValues {
+  token: String;
 }
 
-export interface UserSubscriptionPayloadPromise
-  extends Promise<UserSubscriptionPayload>,
+export interface AuthPayloadPreviousValuesPromise
+  extends Promise<AuthPayloadPreviousValues>,
     Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T: UserPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T: UserPreviousValuesPromise>() => T;
+  token: () => Promise<String>;
 }
 
-export interface UserSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+export interface AuthPayloadPreviousValuesSubscription
+  extends Promise<AsyncIterator<AuthPayloadPreviousValues>>,
     Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T: UserSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T: UserPreviousValuesSubscription>() => T;
+  token: () => Promise<AsyncIterator<String>>;
 }
 
-export interface UserConnection {}
+export interface AuthPayloadConnection {}
 
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
+export interface AuthPayloadConnectionPromise
+  extends Promise<AuthPayloadConnection>,
     Fragmentable {
   pageInfo: <T: PageInfoPromise>() => T;
-  edges: <T: FragmentableArray<UserEdge>>() => T;
-  aggregate: <T: AggregateUserPromise>() => T;
+  edges: <T: FragmentableArray<AuthPayloadEdge>>() => T;
+  aggregate: <T: AggregateAuthPayloadPromise>() => T;
 }
 
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
+export interface AuthPayloadConnectionSubscription
+  extends Promise<AsyncIterator<AuthPayloadConnection>>,
     Fragmentable {
   pageInfo: <T: PageInfoSubscription>() => T;
-  edges: <T: Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T: AggregateUserSubscription>() => T;
+  edges: <T: Promise<AsyncIterator<AuthPayloadEdgeSubscription>>>() => T;
+  aggregate: <T: AggregateAuthPayloadSubscription>() => T;
 }
 
 export interface PageInfo {
@@ -394,39 +710,83 @@ export interface AggregateUserSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface UserPreviousValues {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  email: String;
-  name?: String;
-  photoUrl?: String;
-  description?: String;
+export interface UserSubscriptionPayload {
+  mutation: MutationType;
+  updatedFields?: String[];
 }
 
-export interface UserPreviousValuesPromise
-  extends Promise<UserPreviousValues>,
+export interface UserSubscriptionPayloadPromise
+  extends Promise<UserSubscriptionPayload>,
     Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  email: () => Promise<String>;
-  name: () => Promise<String>;
-  photoUrl: () => Promise<String>;
-  description: () => Promise<String>;
+  mutation: () => Promise<MutationType>;
+  node: <T: UserPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T: UserPreviousValuesPromise>() => T;
 }
 
-export interface UserPreviousValuesSubscription
-  extends Promise<AsyncIterator<UserPreviousValues>>,
+export interface UserSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  email: () => Promise<AsyncIterator<String>>;
-  name: () => Promise<AsyncIterator<String>>;
-  photoUrl: () => Promise<AsyncIterator<String>>;
-  description: () => Promise<AsyncIterator<String>>;
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T: UserSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T: UserPreviousValuesSubscription>() => T;
 }
+
+export interface AggregateAuthPayload {
+  count: Int;
+}
+
+export interface AggregateAuthPayloadPromise
+  extends Promise<AggregateAuthPayload>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateAuthPayloadSubscription
+  extends Promise<AsyncIterator<AggregateAuthPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface UserConnection {}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T: PageInfoPromise>() => T;
+  edges: <T: FragmentableArray<UserEdge>>() => T;
+  aggregate: <T: AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T: PageInfoSubscription>() => T;
+  edges: <T: Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T: AggregateUserSubscription>() => T;
+}
+
+export interface UserEdge {
+  cursor: String;
+}
+
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T: UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T: UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
 
 /*
 DateTime scalar input type, allowing Date
@@ -439,14 +799,11 @@ DateTime scalar output type, which is always a string
 export type DateTimeOutput = string;
 
 /*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean;
-
-/*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
 */
 export type Int = number;
+
+export type Long = string;
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
@@ -459,13 +816,15 @@ The `ID` scalar type represents a unique identifier, often used to refetch an ob
 export type ID_Input = string | number;
 export type ID_Output = string;
 
-export type Long = string;
-
 /**
  * Model Metadata
  */
 
 export const models = [
+  {
+    name: "AuthPayload",
+    embedded: false
+  },
   {
     name: "User",
     embedded: false

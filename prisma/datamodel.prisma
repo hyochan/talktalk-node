@@ -6,6 +6,7 @@ type User {
   description: String
   createdAt: DateTime!
   updatedAt: DateTime!
+  friends: [User!]!
 }
 
 type AuthPayload {
