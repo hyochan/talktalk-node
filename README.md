@@ -15,6 +15,7 @@ You need to know about below techniques in able to understand the server specifi
 
 ## Version
 The version listed is used in current environment. This must not be identical to your environment.
+
 | Tool                  | Version      |
 | --------------------- | ------------ |
 | babeljs               | 7+           |
