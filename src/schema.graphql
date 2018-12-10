@@ -2,7 +2,9 @@
 # import AuthPayload from './generated/prisma.graphql'
 
 type Query{
+  users: [User]!
   user(id: ID!): User
+  firends(id: ID!): [User]!
 }
 
 type Mutation {
