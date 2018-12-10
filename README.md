@@ -26,6 +26,10 @@ The version listed is used in current environment. This must not be identical to
 | docker                | 18.09+       |
 | docker-compose        | 1.23+        |
 
+## Applying schema to database
+* If you've edited `prisma/prisma.yml` or `src/schema.graphql`, you must `npm run prisma:deploy` in order to apply changes to database.
+
+
 ## Settiing up talktalk-node
 We will provide you how to set this up locally when it is ready.
 
