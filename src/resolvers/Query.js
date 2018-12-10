@@ -9,7 +9,10 @@ const Query = {
         },
       },
       info
-    )
+    );
+  },
+  friends: (_, args, context, info) =-> {
+    /// TODO: 
   }
 };
 

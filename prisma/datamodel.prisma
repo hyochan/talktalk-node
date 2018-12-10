@@ -6,7 +6,7 @@ type User {
   description: String
   createdAt: DateTime!
   updatedAt: DateTime!
-  friends: [User!]!
+  friends: [User!]! @relation(name: "Friend")
 }
 
 type AuthPayload {

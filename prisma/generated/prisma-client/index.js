@@ -157,9 +157,12 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface UserCreateOneInput {
-  create?: UserCreateInput;
-  connect?: UserWhereUniqueInput;
+export interface UserCreateInput {
+  email: String;
+  name?: String;
+  photoUrl?: String;
+  description?: String;
+  friends?: UserCreateManyWithoutFriendsInput;
 }
 
 export interface AuthPayloadWhereInput {
@@ -188,26 +191,27 @@ export type UserWhereUniqueInput = AtLeastOne<{
   email?: String
 }>;
 
-export interface UserCreateManyInput {
-  create?: UserCreateInput[];
-  connect?: UserWhereUniqueInput[];
-}
-
-export interface UserUpdateDataInput {
-  email?: String;
-  name?: String;
-  photoUrl?: String;
-  description?: String;
-  friends?: UserUpdateManyInput;
-}
-
 export interface AuthPayloadUpdateManyMutationInput {
   token?: String;
 }
 
-export interface UserUpdateWithWhereUniqueNestedInput {
+export interface UserUpdateWithoutFriendsDataInput {
+  email?: String;
+  name?: String;
+  photoUrl?: String;
+  description?: String;
+}
+
+export interface UserCreateWithoutFriendsInput {
+  email: String;
+  name?: String;
+  photoUrl?: String;
+  description?: String;
+}
+
+export interface UserUpdateWithWhereUniqueWithoutFriendsInput {
   where: UserWhereUniqueInput;
-  data: UserUpdateDataInput;
+  data: UserUpdateWithoutFriendsDataInput;
 }
 
 export interface UserWhereInput {
@@ -305,13 +309,13 @@ export interface UserWhereInput {
   NOT?: UserWhereInput[];
 }
 
-export interface UserUpdateManyInput {
-  create?: UserCreateInput[];
-  update?: UserUpdateWithWhereUniqueNestedInput[];
-  upsert?: UserUpsertWithWhereUniqueNestedInput[];
+export interface UserUpdateManyWithoutFriendsInput {
+  create?: UserCreateWithoutFriendsInput[];
   delete?: UserWhereUniqueInput[];
   connect?: UserWhereUniqueInput[];
   disconnect?: UserWhereUniqueInput[];
+  update?: UserUpdateWithWhereUniqueWithoutFriendsInput[];
+  upsert?: UserUpsertWithWhereUniqueWithoutFriendsInput[];
   deleteMany?: UserScalarWhereInput[];
   updateMany?: UserUpdateManyWithWhereNestedInput[];
 }
@@ -328,12 +332,15 @@ export interface UserUpdateManyWithWhereNestedInput {
   data: UserUpdateManyDataInput;
 }
 
-export interface UserCreateInput {
-  email: String;
-  name?: String;
-  photoUrl?: String;
-  description?: String;
-  friends?: UserCreateManyInput;
+export interface UserUpsertWithWhereUniqueWithoutFriendsInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutFriendsDataInput;
+  create: UserCreateWithoutFriendsInput;
+}
+
+export interface UserCreateManyWithoutFriendsInput {
+  create?: UserCreateWithoutFriendsInput[];
+  connect?: UserWhereUniqueInput[];
 }
 
 export interface UserUpdateInput {
@@ -341,12 +348,28 @@ export interface UserUpdateInput {
   name?: String;
   photoUrl?: String;
   description?: String;
-  friends?: UserUpdateManyInput;
+  friends?: UserUpdateManyWithoutFriendsInput;
+}
+
+export interface UserCreateOneInput {
+  create?: UserCreateInput;
+  connect?: UserWhereUniqueInput;
 }
 
 export interface AuthPayloadCreateInput {
   token: String;
   user: UserCreateOneInput;
+}
+
+export interface UserSubscriptionWhereInput {
+  mutation_in?: MutationType[];
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[];
+  updatedFields_contains_some?: String[];
+  node?: UserWhereInput;
+  AND?: UserSubscriptionWhereInput[];
+  OR?: UserSubscriptionWhereInput[];
+  NOT?: UserSubscriptionWhereInput[];
 }
 
 export interface UserScalarWhereInput {
@@ -457,23 +480,6 @@ export interface AuthPayloadSubscriptionWhereInput {
   AND?: AuthPayloadSubscriptionWhereInput[];
   OR?: AuthPayloadSubscriptionWhereInput[];
   NOT?: AuthPayloadSubscriptionWhereInput[];
-}
-
-export interface UserSubscriptionWhereInput {
-  mutation_in?: MutationType[];
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[];
-  updatedFields_contains_some?: String[];
-  node?: UserWhereInput;
-  AND?: UserSubscriptionWhereInput[];
-  OR?: UserSubscriptionWhereInput[];
-  NOT?: UserSubscriptionWhereInput[];
-}
-
-export interface UserUpsertWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateDataInput;
-  create: UserCreateInput;
 }
 
 export interface NodeNode {

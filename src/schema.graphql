@@ -4,11 +4,11 @@
 type Query{
   users: [User]!
   user(id: ID!): User
-  firends(id: ID!): [User!]!
+  firends(friendEmail: String!): [User!]!
 }
 
 type Mutation {
   signup(email: String!, name: String, photoUrl: String, description: String) : AuthPayload!
-  addFriend(email: String!) : User!
-  removeFriend(email: String!) : User!
+  addFriend(friendEmail: String!) : User!
+  removeFriend(friendEmail: String!) : User!
 }

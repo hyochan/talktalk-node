@@ -158,17 +158,24 @@ input UserCreateInput {
   name: String
   photoUrl: String
   description: String
-  friends: UserCreateManyInput
+  friends: UserCreateManyWithoutFriendsInput
 }
 
-input UserCreateManyInput {
-  create: [UserCreateInput!]
+input UserCreateManyWithoutFriendsInput {
+  create: [UserCreateWithoutFriendsInput!]
   connect: [UserWhereUniqueInput!]
 }
 
 input UserCreateOneInput {
   create: UserCreateInput
   connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutFriendsInput {
+  email: String!
+  name: String
+  photoUrl: String
+  description: String
 }
 
 type UserEdge {
@@ -313,20 +320,12 @@ input UserSubscriptionWhereInput {
   NOT: [UserSubscriptionWhereInput!]
 }
 
-input UserUpdateDataInput {
-  email: String
-  name: String
-  photoUrl: String
-  description: String
-  friends: UserUpdateManyInput
-}
-
 input UserUpdateInput {
   email: String
   name: String
   photoUrl: String
   description: String
-  friends: UserUpdateManyInput
+  friends: UserUpdateManyWithoutFriendsInput
 }
 
 input UserUpdateManyDataInput {
@@ -336,17 +335,6 @@ input UserUpdateManyDataInput {
   description: String
 }
 
-input UserUpdateManyInput {
-  create: [UserCreateInput!]
-  update: [UserUpdateWithWhereUniqueNestedInput!]
-  upsert: [UserUpsertWithWhereUniqueNestedInput!]
-  delete: [UserWhereUniqueInput!]
-  connect: [UserWhereUniqueInput!]
-  disconnect: [UserWhereUniqueInput!]
-  deleteMany: [UserScalarWhereInput!]
-  updateMany: [UserUpdateManyWithWhereNestedInput!]
-}
-
 input UserUpdateManyMutationInput {
   email: String
   name: String
@@ -354,20 +342,38 @@ input UserUpdateManyMutationInput {
   description: String
 }
 
+input UserUpdateManyWithoutFriendsInput {
+  create: [UserCreateWithoutFriendsInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutFriendsInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutFriendsInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
 input UserUpdateManyWithWhereNestedInput {
   where: UserScalarWhereInput!
   data: UserUpdateManyDataInput!
 }
 
-input UserUpdateWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateDataInput!
+input UserUpdateWithoutFriendsDataInput {
+  email: String
+  name: String
+  photoUrl: String
+  description: String
 }
 
-input UserUpsertWithWhereUniqueNestedInput {
+input UserUpdateWithWhereUniqueWithoutFriendsInput {
   where: UserWhereUniqueInput!
-  update: UserUpdateDataInput!
-  create: UserCreateInput!
+  data: UserUpdateWithoutFriendsDataInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutFriendsInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutFriendsDataInput!
+  create: UserCreateWithoutFriendsInput!
 }
 
 input UserWhereInput {
