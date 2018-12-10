@@ -25,7 +25,7 @@ const getUserId = (context) => {
 
 const resolvers = {
   Query: {
-    user: async (_, args, context, info) => {
+    user: (_, args, context, info) => {
       const userId = getUserId(context);
       return context.prisma.query.user(
         {
@@ -51,6 +51,14 @@ const resolvers = {
         token,
         user,
       };
+    },
+    addFriend: (_, args, context, info) => {
+      const userId = getUserId(context);
+      return context.prisma.mutation.updateUser(
+        {
+          data: args,
+        },
+      );
     }
   },
   Node: {
