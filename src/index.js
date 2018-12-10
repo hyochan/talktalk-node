@@ -39,12 +39,16 @@ const resolvers = {
   },
   Mutation: {
     signup: async (_, args, context, info) => {
-      const user = await context.prisma.mutation.createUser({
-        data: args,
-      });
+      const user = await context.prisma.mutation.createUser(
+        {
+          data: args,
+        },
+        // info
+      );
       console.log('user', user);
       const token  = jwt.sign({ userId: user.id }, SECRET);
       return {
+        token,
         user,
       };
     }

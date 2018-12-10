@@ -6,5 +6,5 @@ type Query{
 }
 
 type Mutation {
-  signup(email: String!) : AuthPayload!
+  signup(email: String!, name: String, photoUrl: String, description: String) : AuthPayload!
 }
