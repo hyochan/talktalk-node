@@ -7,6 +7,7 @@
     "start": "npx babel-node src/index.js",
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "git:log": "git log --decorate --oneline --all --graph",
     "prisma:deploy": "PRISMA_MANAGEMENT_API_SECRET=dooboolab-secret-123 prisma deploy"
   },
   "keywords": [],
