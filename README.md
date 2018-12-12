@@ -31,6 +31,13 @@ The version listed is used in current environment. This must not be identical to
 
 
 ## Setting up talktalk-node
+* Runing server
+  1. docker-compose up -d
+     - Run docker in background.
+  2. npm run prisma:deploy
+     - Run prisma container
+  3. npm start
+
 We will provide you how to set this up locally when it is ready.
 
 ## More details
