@@ -26,7 +26,13 @@ const Mutation = {
     );
   },
   removeFriend: (_, { friendEmail }, context, info) => {
-    /// TODO:
+    const userId = getUserId(context);
+    return context.prisma.mutation.updateUser(
+      {
+        where: { id: userId },
+        data: { friends: { disconnect: { email: friendEmail } } },
+      },
+    );
   },
 };
 
