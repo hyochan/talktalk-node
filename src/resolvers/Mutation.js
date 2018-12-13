@@ -16,21 +16,21 @@ const Mutation = {
       user,
     };
   },
-  addFriend: (_, { friendEmail }, context, info) => {
+  addFriend: (_, { friendId }, context, info) => {
     const userId = getUserId(context);
     return context.prisma.mutation.updateUser(
       {
         where: { id: userId },
-        data: { friends: { connect: { email: friendEmail } } },
+        data: { friends: { connect: { email: friendId } } },
       },
     );
   },
-  removeFriend: (_, { friendEmail }, context, info) => {
+  removeFriend: (_, { friendId }, context, info) => {
     const userId = getUserId(context);
     return context.prisma.mutation.updateUser(
       {
         where: { id: userId },
-        data: { friends: { disconnect: { email: friendEmail } } },
+        data: { friends: { disconnect: { email: friendId } } },
       },
     );
   },
