@@ -1,12 +1,12 @@
 import { getUserId } from '../utils';
 const Query = {
   users: (_, args, context, info) => {
-    const { userId } = getUser(context);
+    const { userId } = getUserId(context);
     return context.prisma.query.users(
       {
         where: {
           NOT: {
-            id: args.id
+            id: args.id,
           },
         },
       },
