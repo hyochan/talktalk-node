@@ -6,7 +6,7 @@ const Query = {
       {
         where: {
           NOT: {
-            id: args.id,
+            id: userId,
           },
         },
       },
