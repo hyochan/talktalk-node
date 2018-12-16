@@ -76,8 +76,8 @@ The version listed is used in current environment. This must not be identical to
     - Run prisma container
     - You can check on http://localhost:4466/
 5. `$ npm start`
-- you can run `$ npm run prisma:local` which can do *step 3~5* at once.
-- `Caveat`: *$ prisma deploy* may be failed first execution. It would be working well when you try this again.
+    - you can run `$ npm run prisma:local` which can do *step 3~5* at once.
+    - `Caveat`: *$ prisma deploy* may be failed first execution. It would be working well when you try this again.
   
     #### Cleaning up docker container & prisma server
     - `$ docker-compose stop prisma mysql`
