@@ -1,3 +1,4 @@
+Welcome to the talktalk-node wiki!
 # talktalk-node
 This is backend application for talktalk built in [react-native](https://github.com/facebook/react-native).
 TalkTalk is an opensource chat app under construction.
@@ -32,13 +33,12 @@ The version listed is used in current environment. This must not be identical to
 
 ## Setting up talktalk-node
 
-#### `Install Docker Desktop`
-##### Download Links
-*This step requires Sign in (or Sign Up) to DockerHub*
+### Install Docker Desktop
+##### Download Links : *This step requires Sign in (or Sign Up) to DockerHub*
 - [Docker Desktop(Mac)](https://store.docker.com/editions/community/docker-ce-desktop-mac)
 - [Docker Desktop(Windows)](https://hub.docker.com/editions/community/docker-ce-desktop-windows)
   
-#### `Install the Prisma CLI`
+### Install the Prisma CLI
 - [Document: Set up Prisma](https://www.prisma.io/docs/get-started/01-setting-up-prisma-new-database-JAVASCRIPT-a002/)
 
   ```
@@ -60,14 +60,14 @@ The version listed is used in current environment. This must not be identical to
   - **so install via npm**
   - [GitHub issues: Error: Cannot find module 'generate'](https://github.com/prisma/Mongo-Connector-Preview/issues/1#issuecomment-441361867)
    
-#### `Running server`
+### Running server
   1. `$ docker-compose up -d`
      - Run docker in background.
   2. `$ npm run prisma:deploy`
      - Run prisma container
   3. `$ npm start`
 
-#### `Running local`
+### Running local
   1. `$ npm install`
   2. start `Docker`
   3. `$ docker-compose up -d`
