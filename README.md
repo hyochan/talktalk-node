@@ -67,7 +67,7 @@ The version listed is used in current environment. This must not be identical to
      - Run prisma container
   3. `$ npm start`
 
-### Running local
+### Running server with local configuration
   1. `$ npm install`
   2. start `Docker`
   3. `$ docker-compose up -d`
