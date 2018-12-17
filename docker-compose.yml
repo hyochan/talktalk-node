@@ -50,7 +50,7 @@ services:
     volumes:
       - mysql:/var/lib/mysql
     ports:
-      - "33061:3306"
+      - "3306:3306"
 ### uncomment if you want to Local testing
 volumes:
   mysql:
