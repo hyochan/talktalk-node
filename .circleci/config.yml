@@ -14,15 +14,24 @@ jobs:
             port: 4466
             # uncomment the next line and provide the env var PRISMA_MANAGEMENT_API_SECRET=my-secret to activate cluster security
             # managementApiSecret: noSecret
-            databases:
+            databases: 
               default:
                 connector: mysql
-                host: talktalk-mysql.mysql.database.azure.com
-                user: dooboolab@talktalk-mysql
-                password: dooboolab!
-                rawAccess: true
+                host: mysql
                 port: 3306
+                user: root
+                password: prisma
                 migrations: true
+                rawAccess: true
+      - image: mysql.5.7
+        # restart: always
+        environment:
+          MYSQL_DATABASE: talktalk
+          MYSQL_USER: dooboolab
+          MYSQL_PASSWORD: dooboolab!
+          MYSQL_ROOT_PASSWORD: Dooboolab123!
+        volumes:
+          - mysql:/var/lib/mysql
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
