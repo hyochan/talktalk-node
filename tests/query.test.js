@@ -57,5 +57,6 @@ describe('signup', () => {
     `;
     const deleted = await graphQLClient.request(signoutMutation);
     expect(deleted.signout.id).toEqual(response.signup.user.id);
+    return true;
   });
 });
