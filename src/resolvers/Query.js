@@ -3,13 +3,13 @@ const Query = {
   users: (_, args, context, info) => {
     const { userId } = getUserId(context);
     return context.prisma.query.users(
-      {
-        where: {
-          NOT: {
-            id: userId,
-          },
-        },
-      },
+      // {
+      //   where: {
+      //     NOT: {
+      //       id: userId,
+      //     },
+      //   },
+      // },
     );
   },
   user: (_, args, context, info) => {
