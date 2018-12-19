@@ -1,5 +1,7 @@
 Welcome to the talktalk-node wiki!
 # talktalk-node
+[![codecov](https://codecov.io/gh/dooboolab/talktalk-node/branch/master/graph/badge.svg)](https://codecov.io/gh/dooboolab/talktalk-node)
+
 This is backend application for talktalk built in [react-native](https://github.com/facebook/react-native).
 TalkTalk is an opensource chat app under construction.
 
