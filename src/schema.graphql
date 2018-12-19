@@ -8,7 +8,8 @@ type Query{
 }
 
 type Mutation {
-  signup(email: String!, name: String, photoUrl: String, description: String) : AuthPayload!
+  signup(email: String!, password: String!, name: String, photoUrl: String, description: String) : AuthPayload!
+  signout(id: ID!) : User!
   addFriend(friendId: String!) : User!
   removeFriend(friendId: String!) : User!
 }

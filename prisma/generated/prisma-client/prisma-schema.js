@@ -139,6 +139,7 @@ type Subscription {
 type User {
   id: ID!
   email: String!
+  password: String!
   name: String
   photoUrl: String
   description: String
@@ -155,6 +156,7 @@ type UserConnection {
 
 input UserCreateInput {
   email: String!
+  password: String!
   name: String
   photoUrl: String
   description: String
@@ -173,6 +175,7 @@ input UserCreateOneInput {
 
 input UserCreateWithoutFriendsInput {
   email: String!
+  password: String!
   name: String
   photoUrl: String
   description: String
@@ -188,6 +191,8 @@ enum UserOrderByInput {
   id_DESC
   email_ASC
   email_DESC
+  password_ASC
+  password_DESC
   name_ASC
   name_DESC
   photoUrl_ASC
@@ -203,6 +208,7 @@ enum UserOrderByInput {
 type UserPreviousValues {
   id: ID!
   email: String!
+  password: String!
   name: String
   photoUrl: String
   description: String
@@ -239,6 +245,20 @@ input UserScalarWhereInput {
   email_not_starts_with: String
   email_ends_with: String
   email_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
   name: String
   name_not: String
   name_in: [String!]
@@ -322,6 +342,7 @@ input UserSubscriptionWhereInput {
 
 input UserUpdateInput {
   email: String
+  password: String
   name: String
   photoUrl: String
   description: String
@@ -330,6 +351,7 @@ input UserUpdateInput {
 
 input UserUpdateManyDataInput {
   email: String
+  password: String
   name: String
   photoUrl: String
   description: String
@@ -337,6 +359,7 @@ input UserUpdateManyDataInput {
 
 input UserUpdateManyMutationInput {
   email: String
+  password: String
   name: String
   photoUrl: String
   description: String
@@ -360,6 +383,7 @@ input UserUpdateManyWithWhereNestedInput {
 
 input UserUpdateWithoutFriendsDataInput {
   email: String
+  password: String
   name: String
   photoUrl: String
   description: String
@@ -405,6 +429,20 @@ input UserWhereInput {
   email_not_starts_with: String
   email_ends_with: String
   email_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
   name: String
   name_not: String
   name_in: [String!]
