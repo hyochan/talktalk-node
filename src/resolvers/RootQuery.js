@@ -1,5 +1,6 @@
 import { getUserId } from '../utils';
-const Query = {
+
+const RootQuery = {
   users: (_, args, context, info) => {
     const { userId } = getUserId(context);
     return context.prisma.query.users(
@@ -25,4 +26,4 @@ const Query = {
   },
 };
 
-export default Query;
+export default RootQuery;

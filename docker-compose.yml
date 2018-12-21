@@ -1,56 +1,40 @@
-version: '3'
+version: '3.3'
+
 services:
   prisma:
-    image: prismagraphql/prisma:1.22
-    restart: always
+    build: prisma
     ports:
     - "4466:4466"
+    env_file: .env
     environment:
       PRISMA_CONFIG: |
         port: 4466
-        ### uncomment the next line and provide the env var PRISMA_MANAGEMENT_API_SECRET=my-secret to activate cluster security
-        # managementApiSecret: dooboolab-secret-123
-        ### comment if you want to Local testing
+        managementApiSecret: ${PRISMA_MANAGEMENT_API_SECRET}
         databases:
           default:
-            connector: mysql
-            host: talktalk-mysql.mysql.database.azure.com
-            user: dooboolab@talktalk-mysql
-            password: dooboolab!
-            rawAccess: true
-            port: 3306
-            migrations: true
-        ### uncomment if you want to Local testing
-        # databases: 
-        #   default:
-        #     connector: mysql
-        #     host: mysql
-        #     port: 3306
-        #     user: root
-        #     password: prisma
-        #     migrations: true
-        #     rawAccess: true
-  ### comment if you want to Local testing
-  # mysql:
-  #   image: mysql:5.7
-  #   # restart: always
-  #   environment:
-  #       MYSQL_DATABASE: talktalk
-  #       MYSQL_USER: dooboolab
-  #       MYSQL_PASSWORD: dooboolab!
-  #       MYSQL_ROOT_PASSWORD: Dooboolab123!
-  #   # volumes:
-  #     # - mysql:/var/lib/mysql
-  ### uncomment if you want to Local testing
-  # mysql:
-  #   image: mysql:5.7
-  #   restart: always
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: prisma
-  #   volumes:
-  #     - mysql:/var/lib/mysql
-  #   ports:
-  #     - "33061:3306"
-### uncomment if you want to Local testing
-# volumes:
-#   mysql:
+            connector: ${PRISMA_DB_CONNECTOR:-mysql}
+            host: ${PRISMA_DB_HOST:-mysql}
+            port: ${PRISMA_DB_PORT:-3306}
+            # https://github.com/prisma/prisma/issues/2506
+            user: ${PRISMA_DB_USER:-root}
+            password: ${PRISMA_DB_PASSWORD:-prisma}
+            rawAccess: ${PRISMA_DB_RAW_ACCESS:-true}
+            migrations: ${PRISMA_DB_MIGRATIONS:-true}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_USER: ${PRISMA_DB_USER:-prisma}
+      MYSQL_PASSWORD: ${PRISMA_DB_PASSWORD:-prisma}
+      # MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+      MYSQL_ROOT_PASSWORD: ${PRISMA_DB_PASSWORD:-prisma}
+      # https://github.com/prisma/prisma/issues/2506
+      MYSQL_DATABASE: ${PRISMA_DB_DATABASE:-prisma}
+    volumes:
+      - mysql:/var/lib/mysql
+      - /etc/localtime:/etc/localtime:ro
+
+volumes:
+  mysql:

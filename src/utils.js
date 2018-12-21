@@ -1,6 +1,6 @@
-import jwt, { verify } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
-const APP_SECRET = 'REACT NATIVE SEOUL - DOOBOOLAB';
+const { JWT_SECRET } = process.env;
 
 class AuthError extends Error {
   constructor() {
@@ -8,17 +8,12 @@ class AuthError extends Error {
   }
 }
 
-const getUserId = (context) => {
-  const Authorization = context.request.get('Authorization');
-  if (Authorization) {
-    const token = Authorization.replace('Bearer ', '');
-    const { userId } = jwt.verify(token, APP_SECRET);
+export const getUserId = (context) => {
+  const authHeader = context.request.get('Authorization');
+  if (authHeader) {
+    const token = authHeader.replace('Bearer ', '');
+    const { userId } = jwt.verify(token, JWT_SECRET);
     return userId;
   }
   throw new AuthError();
-};
-
-export {
-  getUserId,
-  APP_SECRET,
 };

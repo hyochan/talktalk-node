@@ -1,8 +1,10 @@
 import jwt from 'jsonwebtoken';
 import sha256 from 'sha256';
-import { getUserId, APP_SECRET } from '../utils';
+import { getUserId } from '../utils';
 
-const Mutation = {
+const { JWT_SECRET } = process.env;
+
+const RootMutation = {
   signup: async(_, args, context, info) => {
     if (args.password) {
       args.password = sha256(args.password);
@@ -15,7 +17,7 @@ const Mutation = {
       // info
     );
     console.log('user', user);
-    const token = jwt.sign({ userId: user.id }, APP_SECRET);
+    const token = jwt.sign({ userId: user.id }, JWT_SECRET);
     return {
       token,
       user,
@@ -51,4 +53,4 @@ const Mutation = {
   },
 };
 
-export default Mutation;
+export default RootMutation;

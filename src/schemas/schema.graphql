@@ -1,13 +1,12 @@
-# import User from './generated/prisma.graphql'
-# import AuthPayload from './generated/prisma.graphql'
+#import './prisma.graphql'
 
-type Query{
+type RootQuery {
   users: [User]!
   user(id: ID!): User
   firends(friendId: String!): [User!]!
 }
 
-type Mutation {
+type RootMutation {
   signup(email: String!, password: String!, name: String, photoUrl: String, description: String) : AuthPayload!
   signout(id: ID!) : User!
   addFriend(friendId: String!) : User!

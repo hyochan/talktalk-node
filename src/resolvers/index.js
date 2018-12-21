@@ -1,9 +1,3 @@
-import { Query } from './Query';
-import { Mutation } from './Mutation';
-
-const resolvers = {
-  Query,
-  Mutation,
-};
-
-export default resolvers;
+export { default as Node } from './Node';
+export { default as RootQuery } from './Query';
+export { default as RootMutation } from './Mutation';

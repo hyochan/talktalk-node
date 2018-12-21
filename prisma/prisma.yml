@@ -1,10 +1,10 @@
-endpoint: http://localhost:4466
+endpoint: ${env:PRISMA_ENDPOINT}
+
 datamodel: datamodel.prisma
-# secret: dooboolab-secret-123
 
 generate:
     - generator: flow-client
-      output: ./generated/prisma-client
+      output: ../src/client
 
 hooks:
   post-deploy:
