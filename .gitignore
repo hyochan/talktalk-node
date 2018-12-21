@@ -47,9 +47,11 @@ node_modules/
 .history
 
 # Build output
+/client
 /resolvers
 /*.js
 !/*.config.js
 
 # Prisma
-/prisma/generated
+/src/client
+generated
