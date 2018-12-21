@@ -46,5 +46,8 @@ node_modules/
 !.vscode/extensions.json
 .history
 
+# Babel build output
+build
+
 # Prisma
 prisma/generated

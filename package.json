@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
-    "start": "npx babel-node src/index.js",
+    "build": "babel -d build src",
+    "start": "npm run build && node build/index.js",
     "lint": "eslint .",
-    "test-server": "NODE_ENV=test babel-node src/index.js",
-    "test": "NODE_ENV=test nyc jest -w 1 --detectOpenHandles --forceExit",
-    "posttest": "nyc report --reporter=json",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
     "git:log": "git log --decorate --oneline --all --graph",
     "prisma:deploy": "PRISMA_MANAGEMENT_API_SECRET=dooboolab-secret-123 prisma deploy",
     "prisma:local": "docker-compose up -d && prisma deploy && npm start"
@@ -45,7 +45,6 @@
     "eslint-plugin-standard": "^4.0.0",
     "graphql-cli": "^3.0.3",
     "graphql-request": "^1.8.2",
-    "jest": "^23.6.0",
-    "nyc": "^13.1.0"
+    "jest": "^23.6.0"
   }
 }
