@@ -8,7 +8,7 @@ const Mutation = {
       password: sha256(args.password),
     };
     const user = await context.prisma.mutation.createUser({ data }, info);
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ userId: user.id }, context.appSecret);
     return { token, user };
   },
   signout: (parent, args, context, info) => (

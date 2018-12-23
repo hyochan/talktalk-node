@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
-export default function authMiddleware(secret) {
-  if (!secret) {
+export default function authMiddleware(appSecret) {
+  if (!appSecret) {
     throw new Error('The secret to encrypt JWT is must be provided');
   }
 
@@ -21,6 +21,7 @@ export default function authMiddleware(secret) {
 
     const contextWithCurrentUser = {
       ...context,
+      appSecret,
       currentUser,
     };
 
