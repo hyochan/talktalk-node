@@ -1,33 +1,32 @@
-import dotenv from 'dotenv';
-import { GraphQLServer } from 'graphql-yoga';
+import { resolve } from 'path';
 import { Prisma } from 'prisma-binding';
+import { GraphQLServer } from 'graphql-yoga';
 
-import rootSchema from './schemas/schema.graphql';
-import prismaSchema from './schemas/prisma.graphql';
+import authMiddleware from './middlewares/authMiddleware';
 
 import * as resolvers from './resolvers';
 
-dotenv.config();
+require('dotenv').config();
 
 const {
   PORT = 4000,
   DEBUG = 'false',
+  JWT_SECRET,
   PRISMA_ENDPOINT,
 } = process.env;
 
-const prisma = new Prisma({
-  typeDefs: prismaSchema,
-  endpoint: PRISMA_ENDPOINT,
-  debug: DEBUG === 'true',
-});
-
 const server = new GraphQLServer({
-  typeDefs: rootSchema,
-  resolvers,
+  typeDefs: resolve(__dirname, 'schemas', 'schema.graphql'),
+  middlewares: [authMiddleware(JWT_SECRET)],
   context: (req) => ({
     ...req,
-    prisma,
+    prisma: new Prisma({
+      typeDefs: resolve(__dirname, 'schemas', 'prisma.graphql'),
+      endpoint: PRISMA_ENDPOINT,
+      debug: DEBUG === 'true',
+    }),
   }),
+  resolvers,
 });
 
 server

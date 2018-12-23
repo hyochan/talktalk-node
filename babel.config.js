@@ -14,7 +14,6 @@ const config = {
     '@babel/transform-flow-comments',
     ['@babel/proposal-class-properties', { 'loose': false }],
     '@babel/proposal-json-strings',
-    'import-graphql',
   ],
 };
 
