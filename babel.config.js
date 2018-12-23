@@ -11,7 +11,6 @@ const config = {
     }],
   ],
   plugins: [
-    '@babel/transform-flow-comments',
     ['@babel/proposal-class-properties', { 'loose': false }],
     '@babel/proposal-json-strings',
   ],
