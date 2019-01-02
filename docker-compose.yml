@@ -20,8 +20,8 @@ services:
             password: ${PRISMA_DB_PASSWORD:-prisma}
             rawAccess: ${PRISMA_DB_RAW_ACCESS:-true}
             migrations: ${PRISMA_DB_MIGRATIONS:-true}
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
+    # volumes:
+      # - /etc/localtime:/etc/localtime:ro
 
   mysql:
     image: mysql:5.7
@@ -34,7 +34,7 @@ services:
       MYSQL_DATABASE: ${PRISMA_DB_DATABASE:-prisma}
     volumes:
       - mysql:/var/lib/mysql
-      - /etc/localtime:/etc/localtime:ro
+      # - /etc/localtime:/etc/localtime:ro
 
 volumes:
   mysql:
