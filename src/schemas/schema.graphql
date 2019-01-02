@@ -1,8 +1,8 @@
-# import User from './generated/prisma.graphql'
-# import AuthPayload from './generated/prisma.graphql'
+# import User from './prisma.graphql'
+# import AuthPayload from './prisma.graphql'
 
-type Query{
-  users: [User]!
+type Query {
+  users: [User]
   user(id: ID!): User
   firends(friendId: String!): [User!]!
 }

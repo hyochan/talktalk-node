@@ -1,62 +1,51 @@
-import { request, GraphQLClient } from 'graphql-request';
+import Query from 'resolvers/Query';
 
-import { runServer } from '../src/runServer';
-import resolvers from '../src/resolvers';
-
-let getHost = () => '';
-let graphQLClient;
-
-describe('signup', () => {
-  beforeAll(async() => {
-    const app = await runServer();
-    const { port } = app.address();
-    getHost = () => `http://127.0.0.1:${port}`;
-    graphQLClient = new GraphQLClient(getHost(), {
-      headers: {
-        authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjanB1cDNvN3UwMDIyMDcxOHFubzFmOXJ4IiwiaWF0IjoxNTQ1MTk0ODI0fQ.T5vU6l4-KIptDrb9HHcUvTJNCMzYCYveekTjl9ZArWU',
+describe('Query', () => {
+  it('should resolves users correctly', () => {
+    const usersResolver = Query.users;
+    const context = {
+      prisma: {
+        query: {
+          users: jest.fn(),
+        },
       },
-    });
+      currentUser: {
+        id: 'current_user_id',
+      },
+    };
+    const info = null;
+
+    usersResolver(null, null, context, info);
+
+    expect(context.prisma.query.users).toHaveBeenCalledWith({
+      where: {
+        NOT: {
+          id: context.currentUser.id,
+        },
+      },
+    }, info);
   });
 
-  test('successfully create & delete', async() => {
-    const mutation = `
-    mutation {
-      signup(email: "test@test.test", password: "password12") {
-        user {
-          id
-        }
-        token
-      }
-    }
-    `;
+  it('should resolves user correctly', () => {
+    const userResolver = Query.user;
+    const args = {
+      id: 'user_id',
+    };
+    const context = {
+      prisma: {
+        query: {
+          user: jest.fn(),
+        },
+      },
+    };
+    const info = null;
 
-    const response = await request(getHost(), mutation);
-    expect(typeof response).toBe('object');
-    expect(typeof response.signup).toBe('object');
-    expect(typeof response.signup.user).toBe('object');
-    expect(typeof response.signup.user.id).toBe('string');
-    expect(typeof response.signup.token).toBe('string');
+    userResolver(null, args, context, info);
 
-    const userQuery = `
-    query {
-      user(id: "${response.signup.user.id}") {
-      id
-      name
-      }
-    }
-    `;
-    const user = await graphQLClient.request(userQuery);
-    expect(user.user.id).toEqual(response.signup.user.id);
-
-    const signoutMutation = `
-    mutation {
-      signout(id: "${response.signup.user.id}") {
-        id
-      }
-    }
-    `;
-    const deleted = await graphQLClient.request(signoutMutation);
-    expect(deleted.signout.id).toEqual(response.signup.user.id);
-    return true;
+    expect(context.prisma.query.user).toHaveBeenCalledWith({
+      where: {
+        id: args.id,
+      },
+    }, info);
   });
 });

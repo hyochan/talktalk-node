@@ -1,28 +1,20 @@
-import { getUserId } from '../utils';
 const Query = {
-  users: (_, args, context, info) => {
-    const { userId } = getUserId(context);
-    return context.prisma.query.users(
-      // {
-      //   where: {
-      //     NOT: {
-      //       id: userId,
-      //     },
-      //   },
-      // },
-    );
-  },
-  user: (_, args, context, info) => {
-    const userId = getUserId(context);
-    return context.prisma.query.user(
-      {
-        where: {
-          id: args.id,
+  users: (parent, args, context, info) => (
+    context.prisma.query.users({
+      where: {
+        NOT: {
+          id: context.currentUser.id,
         },
       },
-      info
-    );
-  },
+    }, info)
+  ),
+  user: (parent, args, context, info) => (
+    context.prisma.query.user({
+      where: {
+        id: args.id,
+      },
+    }, info)
+  ),
 };
 
 export default Query;
