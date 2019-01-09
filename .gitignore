@@ -56,3 +56,4 @@ node_modules/
 # Prisma
 /src/client
 generated
+build
