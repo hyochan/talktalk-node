@@ -85,8 +85,8 @@ Then,
 1. `docker-compose up -d`  
    Run all prisma services in background.
 
-2. `npm run prisma:deploy`  
-   Initialize or apply changes of prisma data modeal to database.
+2. `prisma deploy`  
+   Initialize or apply changes of prisma data model to database.
 
 3. `npm start`  
    Start Express.js server to provide GraphQL API
