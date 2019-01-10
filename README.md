@@ -30,10 +30,6 @@ The version listed is used in current environment. This must not be identical to
 | docker                | 18.09+       |
 | docker-compose        | 1.23+        |
 
-## Applying schema to database
-* If you've edited `prisma/datamodel.prisma`, you must `npm run prisma:deploy` in order to apply changes to database.
-
-
 ## Setting up talktalk-node
 
 ### Install Docker Desktop
@@ -90,6 +86,9 @@ Then,
 
 3. `npm start`  
    Start Express.js server to provide GraphQL API
+
+## Applying schema to database
+* If you've edited `prisma/datamodel.prisma`, you must `prisma deploy` in order to apply changes to database.
 
 ## More details
 - [LICENSE](https://github.com/dooboolab/talktalk-node/blob/master/LICENSE)
