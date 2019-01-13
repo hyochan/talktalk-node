@@ -21,14 +21,13 @@ describe('Mutation', () => {
         },
         appSecret: 'secret',
       };
-      const info = null;
 
-      const { token, user } = await signup(null, args, context, info);
+      const { token, user } = await signup(null, args, context);
       expect(context.prisma.mutation.createUser).toHaveBeenCalledWith({
         data: {
           password: sha256(args.password),
         },
-      }, info);
+      });
       expect(user.id).toEqual(userId);
       expect(jwt.verify(token, context.appSecret).userId).toEqual(userId);
     });
@@ -47,14 +46,13 @@ describe('Mutation', () => {
           id: 'current_user_id',
         },
       };
-      const info = null;
 
-      signout(null, null, context, info);
+      signout(null, null, context);
       expect(context.prisma.mutation.deleteUser).toHaveBeenCalledWith({
         where: {
           id: context.currentUser.id,
         },
-      }, info);
+      });
     });
   });
 
