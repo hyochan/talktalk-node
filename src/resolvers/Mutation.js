@@ -16,7 +16,7 @@ const Mutation = {
       where: {
         id: context.currentUser.id,
       },
-    }, info)
+    })
   ),
   addFriend: (parent, args, context, info) => (
     context.prisma.mutation.updateUser({
