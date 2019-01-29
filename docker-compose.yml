@@ -32,6 +32,8 @@ services:
       MYSQL_ROOT_PASSWORD: ${PRISMA_DB_PASSWORD:-prisma}
       # https://github.com/prisma/prisma/issues/2506
       MYSQL_DATABASE: ${PRISMA_DB_DATABASE:-prisma}
+    ports:
+      - '3333:3306'      
     volumes:
       - mysql:/var/lib/mysql
       # - /etc/localtime:/etc/localtime:ro
