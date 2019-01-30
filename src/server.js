@@ -15,7 +15,7 @@ const {
 } = process.env;
 
 const server = new GraphQLServer({
-  typeDefs: schemaPath('schema.graphql'),
+  typeDefs: schemaPath('root.graphql'),
   middlewares: [authMiddleware(JWT_SECRET)],
   context: (req) => ({
     ...req,
