@@ -1,8 +1,7 @@
-import { resolve } from 'path'
+import { resolve } from 'path';
 
 export const Constants = {
-    SCHEMA_DIR: 'schemas',
-}
+  SCHEMA_DIR: 'schema',
+};
 
-export const schema = (filename) => resolve(process.cwd(), Constants.SCHEMA_DIR, filename)
-
+export const schemaPath = (filename) => resolve(process.cwd(), Constants.SCHEMA_DIR, filename);
