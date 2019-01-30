@@ -9,8 +9,8 @@ import { Prisma } from 'prisma-binding';
 import { GraphQLServer } from 'graphql-yoga';
 
 import authMiddleware from './middlewares/authMiddleware';
-
 import * as resolvers from './resolvers';
+import { schemaPath } from './utils';
 
 require('dotenv').config();
 
@@ -34,7 +34,7 @@ const prisma = new Prisma({
 });
 
 const server = new GraphQLServer({
-  typeDefs: resolve(__dirname, 'schemas', 'schema.graphql'),
+  typeDefs: schemaPath('root.graphql'),
   middlewares: [authMiddleware(JWT_SECRET)],
   context: (req) => ({
     ...req,

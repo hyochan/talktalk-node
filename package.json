@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "description": "TalkTalk Server and Client built on top of Prisma GraphQL",
   "scripts": {
-    "build": "prisma generate && babel -d . src --out-dir build && cp -r src/schemas build/schemas",
-    "build:window": "prisma generate && babel -d . src --out-dir build && ncp src/schemas build/schemas",
+    "build": "prisma generate && babel -d . src --out-dir build",
     "start": "npm run build && node build/server.js",
-    "start:window": "npm run build:window && node build/server.js",
     "prepublishOnly": "npm run build",
     "lint": "eslint .",
     "test": "jest",
@@ -52,7 +50,6 @@
     "graphql-cli": "^3.0.3",
     "graphql-request": "^1.8.2",
     "jest": "^23.6.0",
-    "ncp": "^2.0.0",
     "prisma-cli": "^1.0.9"
   }
 }
