@@ -2,12 +2,31 @@ type User {
   id: ID! @unique
   email: String! @unique
   password: String!
-  name: String
+  displayName: String
   photoUrl: String
-  description: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  statusMsg: String
   friends: [User!]! @relation(name: "Friend")
+  isOnline: Boolean
+  created: DateTime!
+  updated: DateTime!
+}
+
+type Chatroom {
+  id: ID! @unique
+  lastChat: Chat @relation(name: "LastChat")
+  lastChatCnt: Int
+  chats: [Chat!]! @relation(name: "Chat")
+  users: [User!]! @relation(name: "User")
+  created: DateTime!
+  updated: DateTime!
+}
+
+type Chat {
+  id: ID! @unique
+  sender: User
+  message: String
+  created: DateTime!
+  updated: DateTime!
 }
 
 type AuthPayload {
