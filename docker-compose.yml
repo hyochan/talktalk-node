@@ -35,6 +35,7 @@ services:
     volumes:
       - mysql:/var/lib/mysql
       # - /etc/localtime:/etc/localtime:ro
-
+    ports:
+      - ${PRISMA_DB_PORT:-3306}:${PRISMA_DB_PORT:-3306}
 volumes:
   mysql:
