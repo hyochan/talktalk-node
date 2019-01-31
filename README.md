@@ -66,15 +66,19 @@ First of all, run `cp .env.sample .env` to generate environment file.
 Basically you need to change nothing but only `JWT_SECRET` with any value for local dev environment.
 
 | Name                         | Description               | required? | default               |
-|:-----------------------------|:--------------------------| --------- | --------------------- |
+|:-----------------------------|:------------------------- | --------- | --------------------- |
 | JWT_SECRET                   | Secret key to enc/dec JWT | true      |                       |
+| PW_RESET_KEY                 | Encrypting key for resetting password  | true      |  |
+| PRODUCTION_END_POINT         | Production server url     | false     |                       |
+| CS_EMAIL_ADDRESS             | Bot email address         | true      |                       |
+| CS_EMAIL_PASSWORD            | Bot email password        | true      |                       |
 | DEBUG                        | Flag to enable debug mode |           | false                 |
 | PRISMA_ENDPOINT              | Prisma endpoint URL       | true      | http://localhost:4466 |
 | PRISMA_MANAGEMENT_API_SECRET | Prisma service secret, required for production | false |  |
 | PRISMA_DB_CONNECTOR          | Database connector        | true      | mysql                 |
-| PRISMA_DB_DATABASE           | Database name             | true      | prisma                |
-| PRISMA_DB_USER               | Database username         | true      | prisma                |
-| PRISMA_DB_PASSWORD           | Database password         | true      | prisma                |
+| PRISMA_DB_DATABASE           | Database name             | false     | prisma                |
+| MY_SQL_ROOT_PASSWORD         | Database root password    | false     | prisma                |
+| * note thate if you do not want to go throught all these at first time, just cp `.env.sample` directly to `.env` and go to next step.
 
 Then,
 
