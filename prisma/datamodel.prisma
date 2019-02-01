@@ -23,7 +23,7 @@ type Chatroom {
 
 type Chat {
   id: ID! @unique
-  sender: User
+  sender: User!
   message: String
   created: DateTime!
   updated: DateTime!
