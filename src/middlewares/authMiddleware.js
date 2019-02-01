@@ -28,9 +28,9 @@ export default function authMiddleware(appSecret) {
     try {
       const result = await resolve(parent, args, contextWithCurrentUser, info);
       return result;
-    } catch (err) {
+    } catch {
       // Catch NPE on context.currentUser
-      throw new Error(err);
+      throw new Error('Not authorized');
     }
   };
 }
