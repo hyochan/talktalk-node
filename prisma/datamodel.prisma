@@ -6,17 +6,14 @@ type User {
   photoUrl: String
   statusMsg: String
   friends: [User!]! @relation(name: "Friend")
-  isOnline: Boolean
   created: DateTime!
   updated: DateTime!
 }
 
 type Chatroom {
   id: ID! @unique
-  lastChat: Chat @relation(name: "LastChat")
-  lastChatCnt: Int
   chats: [Chat!]! @relation(name: "Chat")
-  users: [User!]! @relation(name: "User")
+  userIds: [String]
   created: DateTime!
   updated: DateTime!
 }
