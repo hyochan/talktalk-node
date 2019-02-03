@@ -78,9 +78,8 @@ Basically you need to change nothing but only `JWT_SECRET` with any value for lo
 | PRISMA_DB_CONNECTOR          | Database connector        | true      | mysql                 |
 | PRISMA_DB_DATABASE           | Database name             | false     | prisma                |
 | MY_SQL_ROOT_PASSWORD         | Database root password    | false     | prisma                |
-| * note thate if you do not want to go throught all these at first time, just cp `.env.sample` directly to `.env` and go to next step.
 
-Then,
+Start with below steps,
 
 1. `docker-compose up -d`  
    Run all prisma services in background.
