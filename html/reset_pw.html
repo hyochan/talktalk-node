@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TalkTalk</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<style type="text/css">
+    /* FONTS */
+    /* iOS BLUE LINKS */
+    a[x-apple-data-detectors] {
+        color: inherit !important;
+        text-decoration: none !important;
+        font-size: inherit !important;
+        font-family: inherit !important;
+        font-weight: inherit !important;
+        line-height: inherit !important;
+    }
+    
+    /* MOBILE STYLES */
+    @media screen and (max-width:600px){
+        h1 {
+            font-size: 32px !important;
+            line-height: 32px !important;
+        }
+    }
+
+    /* ANDROID CENTER FIX */
+    div[style*="margin: 16px 0;"] { margin: 0 !important; }
+
+    #wrapper {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-self: stretch;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    h3 {
+      font-size: 28px;
+      color: rgb(65,77,107);
+    }
+
+    p {
+      font-size: 18px;
+      color: rgb(58,139,255);
+    }
+</style>
+</head>
+<body>
+  <div id="wrapper">
+    <h3>Talk Talk</h3>
+    <p>Password has changed<br/><b><%= password %></b></p>
+  </div>
+</body>
+</html>
