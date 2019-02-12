@@ -5,6 +5,7 @@ import nodemailer from 'nodemailer';
 
 import ejs from 'ejs';
 import path, { resolve } from 'path';
+
 import { Prisma } from 'prisma-binding';
 import { GraphQLServer } from 'graphql-yoga';
 
