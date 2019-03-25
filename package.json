@@ -27,7 +27,7 @@
     "graphql": "^14.0.2",
     "graphql-yoga": "^1.16.7",
     "jsonwebtoken": "^8.4.0",
-    "nodemailer": "^5.1.1",
+    "nodemailer": "^6.0.0",
     "prisma-binding": "^2.2.11",
     "randomstring": "^1.1.5",
     "sha256": "^0.2.0"
