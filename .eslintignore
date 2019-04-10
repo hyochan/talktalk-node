@@ -1,3 +1,2 @@
-prisma/generated
-node_modules
-src/generated
+node_modules/
+src/generated/

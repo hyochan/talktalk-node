@@ -2,17 +2,24 @@ const debug = process.env.DEBUG === 'true';
 
 const config = {
   presets: [
-    ['@babel/env', {
+    ['@babel/preset-env', {
       targets: {
         node: 'current',
       },
       useBuiltIns: 'usage',
       shippedProposals: true,
+      loose: true,
     }],
+    '@babel/preset-flow',
   ],
   plugins: [
-    ['@babel/proposal-class-properties', { 'loose': false }],
-    '@babel/proposal-json-strings',
+    '@babel/plugin-proposal-optional-chaining',
+    ['@babel/plugin-proposal-class-properties', {
+      'loose': true,
+    }],
+    ['babel-plugin-module-resolver', {
+      root: ['./src'],
+    }],
   ],
 };
 

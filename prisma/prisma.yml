@@ -2,6 +2,10 @@ endpoint: ${env:PRISMA_ENDPOINT}
 
 datamodel: datamodel.prisma
 
+generate:
+  - generator: flow-client
+    output: ../src/generated/prisma-client/
+
 hooks:
   post-deploy:
-    - graphql get-schema -p prisma
+    - prisma generate

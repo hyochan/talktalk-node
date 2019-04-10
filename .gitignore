@@ -47,12 +47,7 @@ node_modules/
 .history
 
 # Build output
-/resolvers
-/middlewares
-/*.js
-!/*.config.js
+build/
 
-# Prisma
-/src/client
-generated
-build
+# Prisma generated
+src/generated/tmp-resolvers

@@ -1,8 +1,0 @@
-projects:
-    app:
-        schemPath: src/schemas/schema.graphql
-
-    prisma:
-        schemaPath: src/schemas/prisma.graphql
-        extensions:
-            prisma: prisma/prisma.yml

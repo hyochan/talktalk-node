@@ -1,0 +1,81 @@
+scalar DateTime
+scalar Upload
+
+type Query {
+  me: User!
+  user(userId: ID, userEmail: String): User!
+  chat(chatId: ID!): Chat!
+}
+
+type Mutation {
+  # Auth
+  signup(email: String!, password: String!, name: String!): User!
+  login(email: String!, password: String!): User!
+  logout: Boolean!
+  resetPassword(email: String!): Boolean!
+
+  # Relationship
+  addFriend(userEmail: String!): Boolean!
+  removeFriend(userId: ID!): Boolean!
+  blockUser(userId: ID!): Boolean!
+
+  # Profile
+  uploadProfilePhoto(file: Upload!): File!
+
+  # Chat
+  createChat(otherUsers: [ID!]!): Chat!
+  leaveChat(chatId: ID!): Boolean!
+  muteChat(chatId: ID!): Boolean!
+  inviteUserToChat(chatId: ID!, userId: ID!): User!
+
+  # Message
+  postFileMessage(chatId: ID!, file: Upload!): Message!
+  postTextMessage(chatID: ID!, text: String!): Message!
+  removeMessage(messageId: ID!): Boolean!
+}
+
+# type Subscription {
+
+# }
+
+type User {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  friends: [User!]!
+  blocks: [User!]!
+  joinedChats: [Chat!]!
+  photo: File
+}
+
+type Chat {
+  id: ID!
+  createdAt: DateTime!
+  lastActiveAt: DateTime!
+  unreadCount: Int!
+  messages: [Message!]!
+}
+
+type Message {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  type: MessageType!
+  text: String
+  file: File
+}
+
+enum MessageType {
+  SYSTEM,
+  TEXT,
+  FILE
+}
+
+type File {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  fileName: String!
+  contentType: String!
+  size: Int!
+}
