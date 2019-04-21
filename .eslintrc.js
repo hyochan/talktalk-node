@@ -2,7 +2,6 @@ module.exports = {
   parser: 'babel-eslint',
   extends: [
     'standard',
-    'plugin:flowtype/recommended',
   ],
   env: {
     'jest': true,

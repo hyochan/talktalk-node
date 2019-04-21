@@ -10,10 +10,8 @@ const config = {
       shippedProposals: true,
       loose: true,
     }],
-    '@babel/preset-flow',
   ],
   plugins: [
-    '@babel/plugin-proposal-optional-chaining',
     ['@babel/plugin-proposal-class-properties', {
       'loose': true,
     }],
