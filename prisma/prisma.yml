@@ -3,7 +3,7 @@ endpoint: ${env:PRISMA_ENDPOINT}
 datamodel: datamodel.prisma
 
 generate:
-  - generator: flow-client
+  - generator: typescript-client
     output: ../src/generated/prisma-client/
 
 hooks:

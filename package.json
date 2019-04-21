@@ -5,10 +5,9 @@
   "repository": "https://github.com/dooboolab/talktalk-node",
   "private": true,
   "scripts": {
-    "graphqlgen": "graphqlgen",
     "build": "babel -d build src",
     "start": "npm run build && node build/server.js",
-    "check-style": "eslint --quiet src/**/*.js",
+    "check-style": "eslint --quiet src/**/*.js src/**/*.ts",
     "test": "jest"
   },
   "dependencies": {
@@ -20,6 +19,7 @@
     "graphql-yoga": "^1.17.4",
     "jsonwebtoken": "^8.5.1",
     "nodemailer": "^6.1.0",
+    "prisma-client-lib": "^1.31.1",
     "randomstring": "^1.1.5"
   },
   "devDependencies": {
@@ -28,6 +28,10 @@
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/plugin-proposal-json-strings": "^7.2.0",
     "@babel/preset-env": "^7.4.3",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/node": "^11.13.6",
+    "@typescript-eslint/eslint-plugin": "^1.7.0",
+    "@typescript-eslint/parser": "^1.7.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.7.1",
@@ -38,6 +42,7 @@
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-standard": "^4.0.0",
     "graphqlgen": "^0.6.0-rc9",
-    "jest": "^24.7.1"
+    "jest": "^24.7.1",
+    "typescript": "^3.4.4"
   }
 }

@@ -10,6 +10,7 @@ const config = {
       shippedProposals: true,
       loose: true,
     }],
+    '@babel/preset-typescript',
   ],
   plugins: [
     ['@babel/plugin-proposal-class-properties', {
