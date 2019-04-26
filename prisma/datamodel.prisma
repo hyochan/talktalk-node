@@ -1,7 +1,7 @@
 type User {
-  id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   email: String! @unique
   passwordDigest: String!
   passwordResetToken: String
@@ -13,7 +13,7 @@ type User {
 }
 
 type UserRelationship {
-  id: ID! @unique
+  id: ID! @id
   type: UserRelationType!
   fromUser: User! @relation(name: "UserToRelationships")
   toUser: User! @relation(name: "RelationshipToUser")
@@ -26,9 +26,9 @@ enum UserRelationType {
 }
 
 type Message {
-  id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   deletedAt: DateTime!
   chat: Chat! @relation(name: "ChatToMessages", onDelete: CASCADE)
   author: User!
@@ -44,24 +44,24 @@ enum MessageType {
 }
 
 type Chat {
-  id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   members: [ChatMembership!]! @relation(name: "ChatToMemberships")
   messages: [Message!] @relation(name: "ChatToMessages")
 }
 
 type ChatMembership {
-  id: ID! @unique
+  id: ID! @id
   chat: Chat! @relation(name: "ChatToMemberships")
   user: User! @relation(name: "UserToMemberships")
-  isMuted: Boolean! @default(value: "false")
+  isMuted: Boolean! @default(value: false)
 }
 
 type File {
-  id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   contentType: String!
   size: Int!
   fileName: String!
