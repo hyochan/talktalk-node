@@ -19,14 +19,10 @@ const {
   PORT = 4000,
   DEBUG = 'false',
   JWT_SECRET,
-  PW_RESET_KEY,
   CS_EMAIL_ADDRESS,
   CS_EMAIL_PASSWORD,
-  PRODUCTION_END_POINT,
   PRISMA_ENDPOINT,
 } = process.env;
-
-const URL = DEBUG !== 'false' ? PRODUCTION_END_POINT : 'http://localhost:4000';
 
 const prisma = new Prisma({
   typeDefs: resolve(__dirname, 'schemas', 'prisma.graphql'),
@@ -54,7 +50,7 @@ server.express.set('view engine', 'html');
 /**
  * Send reset password link to user's email address.
  */
-server.express.get('/reset_email/:email', async(req, res) => {
+server.express.get('/reset_email/:email', async (req, res) => {
   if (!req.params.email) {
     res.status(404).end();
   }
@@ -90,7 +86,7 @@ server.express.get('/reset_email/:email', async(req, res) => {
     from: CS_EMAIL_ADDRESS,
     to: req.params.email,
     subject: 'TalkTalk - Reset Password', // Subject line
-    html: `Reset your [TalkTalk] password by clicking → <a href="${URL}/reset_password/${encrypted}">RESET PASSWORD</a>`,
+    html: `Reset your [TalkTalk] password by clicking → <a href="${PRISMA_ENDPOINT}/reset_password/${encrypted}">RESET PASSWORD</a>`,
   };
 
   transporter.sendMail(mailOptions, (err, transportRes) => {
@@ -115,7 +111,7 @@ server.express.get('/reset_email/:email', async(req, res) => {
 /**
  * Reset password when user clicks on sent `${reset password link}`.
  */
-server.express.get('/reset_password/:encrypted', async(req, res) => {
+server.express.get('/reset_password/:encrypted', async (req, res) => {
   if (!req.params.encrypted) {
     res.status(404).end();
   }

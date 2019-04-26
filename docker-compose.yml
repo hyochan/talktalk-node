@@ -15,27 +15,18 @@ services:
             connector: ${PRISMA_DB_CONNECTOR:-mysql}
             host: ${PRISMA_DB_HOST:-mysql}
             port: ${PRISMA_DB_PORT:-3306}
-            # Prisma needs root acess
             user: root
-            password: ${MYSQL_ROOT_PASSWORD:-prisma}
-            rawAccess: ${PRISMA_DB_RAW_ACCESS:-true}
-            migrations: ${PRISMA_DB_MIGRATIONS:-true}
-    # volumes:
-      # - /etc/localtime:/etc/localtime:ro
+            password: ${PRISMA_DB_PASSWORD:-prisma}
+            # Watch an issue https://github.com/prisma/prisma-admin-feedback/issues/130
+            # rawAccess: ${PRISMA_DB_RAW_ACCESS:-true}
+            # migrations: ${PRISMA_DB_MIGRATIONS:-true}
 
   mysql:
     image: mysql:5.7
     environment:
-      # MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-prisma}
-      # Should not state `MYSQL_DATABASE` - This may cause problem because prisma cli is referring to the root of database.
-      # Try running `docker-compose down -v docker-compose rm -v` instead if you face issue with remaining database.
-      # MYSQL_DATABASE: ${MYSQL_DATABASE:-prisma}
-    ports:
-      - "3306:3306"
+      MYSQL_ROOT_PASSWORD: ${PRISMA_DB_PASSWORD:-prisma}
     volumes:
       - mysql:/var/lib/mysql
-      # - /etc/localtime:/etc/localtime:ro
 
 volumes:
   mysql:

@@ -51,14 +51,6 @@ The version listed is used in current environment. This must not be identical to
 
     **`Caution`: prisma installation via npm recommended.**  
     
-    ```
-    Error: Cannot find module 'generate'
-    ```
-    - when you execute *local test* via `prisma deploy` command at **post-deploy hook setting** in `prisma.yml`, this error occured in prisma *Homebrew installation*.
-    - that error not fixed in *Homebrew installation* yet.
-    - **so install via npm**
-    - [GitHub issues: Error: Cannot find module 'generate'](https://github.com/prisma/Mongo-Connector-Preview/issues/1#issuecomment-441361867)
-   
 ### Running server
 
 First of all, run `cp .env.sample .env` to generate environment file.
@@ -68,16 +60,15 @@ Basically you need to change nothing but only `JWT_SECRET` with any value for lo
 | Name                         | Description               | required? | default               |
 |:-----------------------------|:------------------------- | --------- | --------------------- |
 | JWT_SECRET                   | Secret key to enc/dec JWT | true      |                       |
-| PW_RESET_KEY                 | Encrypting key for resetting password  | true      |  |
 | CS_EMAIL_ADDRESS             | Bot email address         | true      |                       |
 | CS_EMAIL_PASSWORD            | Bot email password        | true      |                       |
-| PRODUCTION_END_POINT         | Production server url     | false     |                       |
 | DEBUG                        | Flag to enable debug mode |           | false                 |
 | PRISMA_ENDPOINT              | Prisma endpoint URL       | true      | http://localhost:4466 |
-| PRISMA_MANAGEMENT_API_SECRET | Prisma service secret, required for production | false |  |
+| PRISMA_MANAGEMENT_API_SECRET | [Prisma Management API secret](https://www.prisma.io/docs/prisma-server/authentication-and-security-kke4/#prisma-server), required for production | false |  |
+| PRISMA_SECRET                | [Prisma service secret](https://www.prisma.io/docs/prisma-server/authentication-and-security-kke4/#prisma-services), required for production | false |  |
 | PRISMA_DB_CONNECTOR          | Database connector        | true      | mysql                 |
 | PRISMA_DB_DATABASE           | Database name             | false     | prisma                |
-| MY_SQL_ROOT_PASSWORD         | Database root password    | false     | prisma                |
+| PRISMA_DB_PASSWORD           | Database root password    | false     | prisma                |
 
 Start with below steps,
 
