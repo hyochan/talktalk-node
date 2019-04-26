@@ -7,7 +7,8 @@
   "scripts": {
     "build": "babel -d build src",
     "start": "npm run build && node build/server.js",
-    "check-style": "eslint --quiet src/**/*.js src/**/*.ts",
+    "format": "eslint --quiet src/**/*.js src/**/*.ts",
+    "format:fix": "eslint --fix --quiet src/**/*.js src/**/*.ts",
     "test": "jest"
   },
   "dependencies": {
