@@ -19,6 +19,7 @@ const config = {
     ['babel-plugin-module-resolver', {
       root: ['./src'],
     }],
+    'babel-plugin-macros',
   ],
 };
 

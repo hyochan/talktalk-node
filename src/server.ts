@@ -6,32 +6,23 @@ import nodemailer from 'nodemailer';
 import ejs from 'ejs';
 import path, { resolve } from 'path';
 
-import { Prisma } from 'prisma-binding';
+import { prisma } from './generated/prisma-client';
 import { GraphQLServer } from 'graphql-yoga';
 
 import authMiddleware from './middlewares/authMiddleware';
-import * as resolvers from './resolvers';
-import { schemaPath } from './utils';
+import { resolvers } from './resolvers';
 
-require('dotenv').config();
-
-const {
-  PORT = 4000,
-  DEBUG = 'false',
+import {
+  PORT,
+  DEBUG,
   JWT_SECRET,
   CS_EMAIL_ADDRESS,
   CS_EMAIL_PASSWORD,
   PRISMA_ENDPOINT,
-} = process.env;
-
-const prisma = new Prisma({
-  typeDefs: resolve(__dirname, 'schemas', 'prisma.graphql'),
-  endpoint: PRISMA_ENDPOINT,
-  debug: DEBUG === 'true',
-});
+} from 'dotenv.macro';
 
 const server = new GraphQLServer({
-  typeDefs: schemaPath('root.graphql'),
+  typeDefs: path.join(__dirname, 'schema.graphql'),
   middlewares: [authMiddleware(JWT_SECRET)],
   context: (req) => ({
     ...req,
