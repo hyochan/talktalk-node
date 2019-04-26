@@ -6,11 +6,10 @@ import nodemailer from 'nodemailer';
 import ejs from 'ejs';
 import path, { resolve } from 'path';
 
-import { prisma } from './generated/prisma-client';
 import { GraphQLServer } from 'graphql-yoga';
-
-import authMiddleware from './middlewares/authMiddleware';
-import { resolvers } from './resolvers';
+import { prisma } from 'generated/prisma-client';
+import authMiddleware from 'middlewares/authMiddleware';
+import { resolvers } from 'resolvers';
 
 import {
   PORT,
@@ -24,10 +23,7 @@ import {
 const server = new GraphQLServer({
   typeDefs: path.join(__dirname, 'schema.graphql'),
   middlewares: [authMiddleware(JWT_SECRET)],
-  context: (req) => ({
-    ...req,
-    prisma,
-  }),
+  context: { prisma },
   resolvers,
 });
 
@@ -46,13 +42,9 @@ server.express.get('/reset_email/:email', async (req, res) => {
     res.status(404).end();
   }
 
-  const result = await prisma.query.user({
-    where: {
-      email: req.params.email,
-    },
-  }, `{
-    email,
-  }`);
+  const result = await prisma.user({
+    email: req.params.email,
+  });
 
   if (!result) {
     res.status(400);
@@ -109,11 +101,11 @@ server.express.get('/reset_password/:encrypted', async (req, res) => {
   const decrypted = aes256.decrypt(process.env.PW_RESET_KEY, Buffer.from(req.params.encrypted, 'base64').toString());
   const newPassword = randomString.generate(8);
   try {
-    const result = await prisma.mutation.updateUser({
+    const result = await prisma.updateUser({
       where: {
         email: decrypted,
       },
-      data: { password: sha256(newPassword) },
+      data: { passwordDigest: sha256(newPassword) },
     });
 
     res.render('reset_pw', { password: newPassword });
