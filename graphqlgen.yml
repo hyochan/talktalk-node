@@ -5,7 +5,7 @@ language: typescript
 schema: ./src/schema.graphql
 
 # Type definition for the resolver context object.
-context: ./src/types.ts:Context
+context: ./src/types.ts:ServerContext
 
 # Map SDL types from the GraphQL schema to Flow models.
 models:

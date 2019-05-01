@@ -1,6 +1,4 @@
-const debug = process.env.DEBUG === 'true';
-
-const config = {
+module.exports = {
   presets: [
     ['@babel/preset-env', {
       targets: {
@@ -9,6 +7,7 @@ const config = {
       useBuiltIns: 'usage',
       shippedProposals: true,
       loose: true,
+      corejs: 3,
     }],
     '@babel/preset-typescript',
   ],
@@ -22,9 +21,3 @@ const config = {
     'babel-plugin-macros',
   ],
 };
-
-if (debug) {
-  config.sourceMaps = 'inline';
-}
-
-module.exports = config;

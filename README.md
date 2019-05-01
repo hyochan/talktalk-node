@@ -54,10 +54,14 @@ Basically you need to change nothing but only `JWT_SECRET` with any value for lo
 | Name                         | Description               | required? | default               |
 |:-----------------------------|:------------------------- | --------- | --------------------- |
 | JWT_SECRET                   | Secret key to enc/dec JWT | true      |                       |
-| CS_EMAIL_ADDRESS             | Bot email address         | true      |                       |
-| CS_EMAIL_PASSWORD            | Bot email password        | true      |                       |
-| DEBUG                        | Flag to enable debug mode |           | false                 |
-| PRISMA_ENDPOINT              | Prisma endpoint URL       | true      | http://localhost:4466 |
+| CS_EMAIL_ADDRESS             | Noreply email address     | false     |                       |
+| SMTP_SERVICE                 | SMTP service provider     | false     |                       |
+| SMTP_HOST                    | SMTP service host         | false     |                       |
+| SMTP_PORT                    | SMTP service port         | false     |                       |
+| SMTP_USER                    | User for SMTP authentication       | false |                  |
+| SMTP_PASSWORD                | Password for SMTP authentication       | false |              |
+| PRISMA_ENDPOINT              | Prisma endpoint port      | true      | 4466 |
+| PRISMA_PORT                  | Prisma endpoint URL       | true      | http://localhost:4466 |
 | PRISMA_MANAGEMENT_API_SECRET | [Prisma Management API secret](https://www.prisma.io/docs/prisma-server/authentication-and-security-kke4/#prisma-server), required for production | false |  |
 | PRISMA_SECRET                | [Prisma service secret](https://www.prisma.io/docs/prisma-server/authentication-and-security-kke4/#prisma-services), required for production | false |  |
 | PRISMA_DB_CONNECTOR          | Database connector        | true      | mysql                 |

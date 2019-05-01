@@ -2,7 +2,7 @@
 
 import { GraphQLResolveInfo } from "graphql";
 import { User, Chat, Message, File } from "./prisma-client";
-import { Context } from "../types";
+import { ServerContext } from "../types";
 
 export type MessageType = "SYSTEM" | "TEXT" | "FILE";
 
@@ -22,7 +22,7 @@ export namespace QueryResolvers {
     | ((
         parent: undefined,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => User | Promise<User>)
     | {
@@ -30,7 +30,7 @@ export namespace QueryResolvers {
         resolve: (
           parent: undefined,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => User | Promise<User>;
       };
@@ -39,7 +39,7 @@ export namespace QueryResolvers {
     | ((
         parent: undefined,
         args: ArgsUser,
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => User | Promise<User>)
     | {
@@ -47,7 +47,7 @@ export namespace QueryResolvers {
         resolve: (
           parent: undefined,
           args: ArgsUser,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => User | Promise<User>;
       };
@@ -56,7 +56,7 @@ export namespace QueryResolvers {
     | ((
         parent: undefined,
         args: ArgsChat,
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => Chat | Promise<Chat>)
     | {
@@ -64,7 +64,7 @@ export namespace QueryResolvers {
         resolve: (
           parent: undefined,
           args: ArgsChat,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => Chat | Promise<Chat>;
       };
@@ -74,7 +74,7 @@ export namespace QueryResolvers {
       | ((
           parent: undefined,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => User | Promise<User>)
       | {
@@ -82,7 +82,7 @@ export namespace QueryResolvers {
           resolve: (
             parent: undefined,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => User | Promise<User>;
         };
@@ -91,7 +91,7 @@ export namespace QueryResolvers {
       | ((
           parent: undefined,
           args: ArgsUser,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => User | Promise<User>)
       | {
@@ -99,7 +99,7 @@ export namespace QueryResolvers {
           resolve: (
             parent: undefined,
             args: ArgsUser,
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => User | Promise<User>;
         };
@@ -108,7 +108,7 @@ export namespace QueryResolvers {
       | ((
           parent: undefined,
           args: ArgsChat,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => Chat | Promise<Chat>)
       | {
@@ -116,7 +116,7 @@ export namespace QueryResolvers {
           resolve: (
             parent: undefined,
             args: ArgsChat,
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => Chat | Promise<Chat>;
         };
@@ -134,7 +134,7 @@ export namespace UserResolvers {
     | ((
         parent: User,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => string | Promise<string>)
     | {
@@ -142,7 +142,7 @@ export namespace UserResolvers {
         resolve: (
           parent: User,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>;
       };
@@ -151,7 +151,7 @@ export namespace UserResolvers {
     | ((
         parent: User,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => string | Promise<string>)
     | {
@@ -159,7 +159,7 @@ export namespace UserResolvers {
         resolve: (
           parent: User,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>;
       };
@@ -168,7 +168,7 @@ export namespace UserResolvers {
     | ((
         parent: User,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => string | Promise<string>)
     | {
@@ -176,7 +176,7 @@ export namespace UserResolvers {
         resolve: (
           parent: User,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>;
       };
@@ -185,7 +185,7 @@ export namespace UserResolvers {
     | ((
         parent: User,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => User[] | Promise<User[]>)
     | {
@@ -193,7 +193,7 @@ export namespace UserResolvers {
         resolve: (
           parent: User,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => User[] | Promise<User[]>;
       };
@@ -202,7 +202,7 @@ export namespace UserResolvers {
     | ((
         parent: User,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => User[] | Promise<User[]>)
     | {
@@ -210,7 +210,7 @@ export namespace UserResolvers {
         resolve: (
           parent: User,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => User[] | Promise<User[]>;
       };
@@ -219,7 +219,7 @@ export namespace UserResolvers {
     | ((
         parent: User,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => Chat[] | Promise<Chat[]>)
     | {
@@ -227,7 +227,7 @@ export namespace UserResolvers {
         resolve: (
           parent: User,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => Chat[] | Promise<Chat[]>;
       };
@@ -236,7 +236,7 @@ export namespace UserResolvers {
     | ((
         parent: User,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => File | null | Promise<File | null>)
     | {
@@ -244,7 +244,7 @@ export namespace UserResolvers {
         resolve: (
           parent: User,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => File | null | Promise<File | null>;
       };
@@ -254,7 +254,7 @@ export namespace UserResolvers {
       | ((
           parent: User,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>)
       | {
@@ -262,7 +262,7 @@ export namespace UserResolvers {
           resolve: (
             parent: User,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => string | Promise<string>;
         };
@@ -271,7 +271,7 @@ export namespace UserResolvers {
       | ((
           parent: User,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>)
       | {
@@ -279,7 +279,7 @@ export namespace UserResolvers {
           resolve: (
             parent: User,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => string | Promise<string>;
         };
@@ -288,7 +288,7 @@ export namespace UserResolvers {
       | ((
           parent: User,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>)
       | {
@@ -296,7 +296,7 @@ export namespace UserResolvers {
           resolve: (
             parent: User,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => string | Promise<string>;
         };
@@ -305,7 +305,7 @@ export namespace UserResolvers {
       | ((
           parent: User,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => User[] | Promise<User[]>)
       | {
@@ -313,7 +313,7 @@ export namespace UserResolvers {
           resolve: (
             parent: User,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => User[] | Promise<User[]>;
         };
@@ -322,7 +322,7 @@ export namespace UserResolvers {
       | ((
           parent: User,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => User[] | Promise<User[]>)
       | {
@@ -330,7 +330,7 @@ export namespace UserResolvers {
           resolve: (
             parent: User,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => User[] | Promise<User[]>;
         };
@@ -339,7 +339,7 @@ export namespace UserResolvers {
       | ((
           parent: User,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => Chat[] | Promise<Chat[]>)
       | {
@@ -347,7 +347,7 @@ export namespace UserResolvers {
           resolve: (
             parent: User,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => Chat[] | Promise<Chat[]>;
         };
@@ -356,7 +356,7 @@ export namespace UserResolvers {
       | ((
           parent: User,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => File | null | Promise<File | null>)
       | {
@@ -364,7 +364,7 @@ export namespace UserResolvers {
           resolve: (
             parent: User,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => File | null | Promise<File | null>;
         };
@@ -381,7 +381,7 @@ export namespace ChatResolvers {
     | ((
         parent: Chat,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => string | Promise<string>)
     | {
@@ -389,7 +389,7 @@ export namespace ChatResolvers {
         resolve: (
           parent: Chat,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>;
       };
@@ -398,7 +398,7 @@ export namespace ChatResolvers {
     | ((
         parent: Chat,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => string | Promise<string>)
     | {
@@ -406,7 +406,7 @@ export namespace ChatResolvers {
         resolve: (
           parent: Chat,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>;
       };
@@ -415,7 +415,7 @@ export namespace ChatResolvers {
     | ((
         parent: Chat,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => string | Promise<string>)
     | {
@@ -423,7 +423,7 @@ export namespace ChatResolvers {
         resolve: (
           parent: Chat,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>;
       };
@@ -432,7 +432,7 @@ export namespace ChatResolvers {
     | ((
         parent: Chat,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => number | Promise<number>)
     | {
@@ -440,7 +440,7 @@ export namespace ChatResolvers {
         resolve: (
           parent: Chat,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => number | Promise<number>;
       };
@@ -449,7 +449,7 @@ export namespace ChatResolvers {
     | ((
         parent: Chat,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => Message[] | Promise<Message[]>)
     | {
@@ -457,7 +457,7 @@ export namespace ChatResolvers {
         resolve: (
           parent: Chat,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => Message[] | Promise<Message[]>;
       };
@@ -467,7 +467,7 @@ export namespace ChatResolvers {
       | ((
           parent: Chat,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>)
       | {
@@ -475,7 +475,7 @@ export namespace ChatResolvers {
           resolve: (
             parent: Chat,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => string | Promise<string>;
         };
@@ -484,7 +484,7 @@ export namespace ChatResolvers {
       | ((
           parent: Chat,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>)
       | {
@@ -492,7 +492,7 @@ export namespace ChatResolvers {
           resolve: (
             parent: Chat,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => string | Promise<string>;
         };
@@ -501,7 +501,7 @@ export namespace ChatResolvers {
       | ((
           parent: Chat,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>)
       | {
@@ -509,7 +509,7 @@ export namespace ChatResolvers {
           resolve: (
             parent: Chat,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => string | Promise<string>;
         };
@@ -518,7 +518,7 @@ export namespace ChatResolvers {
       | ((
           parent: Chat,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => number | Promise<number>)
       | {
@@ -526,7 +526,7 @@ export namespace ChatResolvers {
           resolve: (
             parent: Chat,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => number | Promise<number>;
         };
@@ -535,7 +535,7 @@ export namespace ChatResolvers {
       | ((
           parent: Chat,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => Message[] | Promise<Message[]>)
       | {
@@ -543,7 +543,7 @@ export namespace ChatResolvers {
           resolve: (
             parent: Chat,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => Message[] | Promise<Message[]>;
         };
@@ -563,7 +563,7 @@ export namespace MessageResolvers {
     | ((
         parent: Message,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => string | Promise<string>)
     | {
@@ -571,7 +571,7 @@ export namespace MessageResolvers {
         resolve: (
           parent: Message,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>;
       };
@@ -580,7 +580,7 @@ export namespace MessageResolvers {
     | ((
         parent: Message,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => string | Promise<string>)
     | {
@@ -588,7 +588,7 @@ export namespace MessageResolvers {
         resolve: (
           parent: Message,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>;
       };
@@ -597,7 +597,7 @@ export namespace MessageResolvers {
     | ((
         parent: Message,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => string | Promise<string>)
     | {
@@ -605,7 +605,7 @@ export namespace MessageResolvers {
         resolve: (
           parent: Message,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>;
       };
@@ -614,7 +614,7 @@ export namespace MessageResolvers {
     | ((
         parent: Message,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => MessageType | Promise<MessageType>)
     | {
@@ -622,7 +622,7 @@ export namespace MessageResolvers {
         resolve: (
           parent: Message,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => MessageType | Promise<MessageType>;
       };
@@ -631,7 +631,7 @@ export namespace MessageResolvers {
     | ((
         parent: Message,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => string | null | Promise<string | null>)
     | {
@@ -639,7 +639,7 @@ export namespace MessageResolvers {
         resolve: (
           parent: Message,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | null | Promise<string | null>;
       };
@@ -648,7 +648,7 @@ export namespace MessageResolvers {
     | ((
         parent: Message,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => File | null | Promise<File | null>)
     | {
@@ -656,7 +656,7 @@ export namespace MessageResolvers {
         resolve: (
           parent: Message,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => File | null | Promise<File | null>;
       };
@@ -666,7 +666,7 @@ export namespace MessageResolvers {
       | ((
           parent: Message,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>)
       | {
@@ -674,7 +674,7 @@ export namespace MessageResolvers {
           resolve: (
             parent: Message,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => string | Promise<string>;
         };
@@ -683,7 +683,7 @@ export namespace MessageResolvers {
       | ((
           parent: Message,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>)
       | {
@@ -691,7 +691,7 @@ export namespace MessageResolvers {
           resolve: (
             parent: Message,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => string | Promise<string>;
         };
@@ -700,7 +700,7 @@ export namespace MessageResolvers {
       | ((
           parent: Message,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>)
       | {
@@ -708,7 +708,7 @@ export namespace MessageResolvers {
           resolve: (
             parent: Message,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => string | Promise<string>;
         };
@@ -717,7 +717,7 @@ export namespace MessageResolvers {
       | ((
           parent: Message,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => MessageType | Promise<MessageType>)
       | {
@@ -725,7 +725,7 @@ export namespace MessageResolvers {
           resolve: (
             parent: Message,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => MessageType | Promise<MessageType>;
         };
@@ -734,7 +734,7 @@ export namespace MessageResolvers {
       | ((
           parent: Message,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | null | Promise<string | null>)
       | {
@@ -742,7 +742,7 @@ export namespace MessageResolvers {
           resolve: (
             parent: Message,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => string | null | Promise<string | null>;
         };
@@ -751,7 +751,7 @@ export namespace MessageResolvers {
       | ((
           parent: Message,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => File | null | Promise<File | null>)
       | {
@@ -759,7 +759,7 @@ export namespace MessageResolvers {
           resolve: (
             parent: Message,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => File | null | Promise<File | null>;
         };
@@ -780,7 +780,7 @@ export namespace FileResolvers {
     | ((
         parent: File,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => string | Promise<string>)
     | {
@@ -788,7 +788,7 @@ export namespace FileResolvers {
         resolve: (
           parent: File,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>;
       };
@@ -797,7 +797,7 @@ export namespace FileResolvers {
     | ((
         parent: File,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => string | Promise<string>)
     | {
@@ -805,7 +805,7 @@ export namespace FileResolvers {
         resolve: (
           parent: File,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>;
       };
@@ -814,7 +814,7 @@ export namespace FileResolvers {
     | ((
         parent: File,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => string | Promise<string>)
     | {
@@ -822,7 +822,7 @@ export namespace FileResolvers {
         resolve: (
           parent: File,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>;
       };
@@ -831,7 +831,7 @@ export namespace FileResolvers {
     | ((
         parent: File,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => string | Promise<string>)
     | {
@@ -839,7 +839,7 @@ export namespace FileResolvers {
         resolve: (
           parent: File,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>;
       };
@@ -848,7 +848,7 @@ export namespace FileResolvers {
     | ((
         parent: File,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => string | Promise<string>)
     | {
@@ -856,7 +856,7 @@ export namespace FileResolvers {
         resolve: (
           parent: File,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>;
       };
@@ -865,7 +865,7 @@ export namespace FileResolvers {
     | ((
         parent: File,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => number | Promise<number>)
     | {
@@ -873,7 +873,7 @@ export namespace FileResolvers {
         resolve: (
           parent: File,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => number | Promise<number>;
       };
@@ -883,7 +883,7 @@ export namespace FileResolvers {
       | ((
           parent: File,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>)
       | {
@@ -891,7 +891,7 @@ export namespace FileResolvers {
           resolve: (
             parent: File,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => string | Promise<string>;
         };
@@ -900,7 +900,7 @@ export namespace FileResolvers {
       | ((
           parent: File,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>)
       | {
@@ -908,7 +908,7 @@ export namespace FileResolvers {
           resolve: (
             parent: File,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => string | Promise<string>;
         };
@@ -917,7 +917,7 @@ export namespace FileResolvers {
       | ((
           parent: File,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>)
       | {
@@ -925,7 +925,7 @@ export namespace FileResolvers {
           resolve: (
             parent: File,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => string | Promise<string>;
         };
@@ -934,7 +934,7 @@ export namespace FileResolvers {
       | ((
           parent: File,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>)
       | {
@@ -942,7 +942,7 @@ export namespace FileResolvers {
           resolve: (
             parent: File,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => string | Promise<string>;
         };
@@ -951,7 +951,7 @@ export namespace FileResolvers {
       | ((
           parent: File,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => string | Promise<string>)
       | {
@@ -959,7 +959,7 @@ export namespace FileResolvers {
           resolve: (
             parent: File,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => string | Promise<string>;
         };
@@ -968,7 +968,7 @@ export namespace FileResolvers {
       | ((
           parent: File,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => number | Promise<number>)
       | {
@@ -976,7 +976,7 @@ export namespace FileResolvers {
           resolve: (
             parent: File,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => number | Promise<number>;
         };
@@ -1052,7 +1052,7 @@ export namespace MutationResolvers {
     | ((
         parent: undefined,
         args: ArgsSignup,
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => User | Promise<User>)
     | {
@@ -1060,7 +1060,7 @@ export namespace MutationResolvers {
         resolve: (
           parent: undefined,
           args: ArgsSignup,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => User | Promise<User>;
       };
@@ -1069,7 +1069,7 @@ export namespace MutationResolvers {
     | ((
         parent: undefined,
         args: ArgsLogin,
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => User | Promise<User>)
     | {
@@ -1077,7 +1077,7 @@ export namespace MutationResolvers {
         resolve: (
           parent: undefined,
           args: ArgsLogin,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => User | Promise<User>;
       };
@@ -1086,7 +1086,7 @@ export namespace MutationResolvers {
     | ((
         parent: undefined,
         args: {},
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => boolean | Promise<boolean>)
     | {
@@ -1094,7 +1094,7 @@ export namespace MutationResolvers {
         resolve: (
           parent: undefined,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => boolean | Promise<boolean>;
       };
@@ -1103,7 +1103,7 @@ export namespace MutationResolvers {
     | ((
         parent: undefined,
         args: ArgsResetPassword,
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => boolean | Promise<boolean>)
     | {
@@ -1111,7 +1111,7 @@ export namespace MutationResolvers {
         resolve: (
           parent: undefined,
           args: ArgsResetPassword,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => boolean | Promise<boolean>;
       };
@@ -1120,7 +1120,7 @@ export namespace MutationResolvers {
     | ((
         parent: undefined,
         args: ArgsAddFriend,
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => boolean | Promise<boolean>)
     | {
@@ -1128,7 +1128,7 @@ export namespace MutationResolvers {
         resolve: (
           parent: undefined,
           args: ArgsAddFriend,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => boolean | Promise<boolean>;
       };
@@ -1137,7 +1137,7 @@ export namespace MutationResolvers {
     | ((
         parent: undefined,
         args: ArgsRemoveFriend,
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => boolean | Promise<boolean>)
     | {
@@ -1145,7 +1145,7 @@ export namespace MutationResolvers {
         resolve: (
           parent: undefined,
           args: ArgsRemoveFriend,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => boolean | Promise<boolean>;
       };
@@ -1154,7 +1154,7 @@ export namespace MutationResolvers {
     | ((
         parent: undefined,
         args: ArgsBlockUser,
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => boolean | Promise<boolean>)
     | {
@@ -1162,7 +1162,7 @@ export namespace MutationResolvers {
         resolve: (
           parent: undefined,
           args: ArgsBlockUser,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => boolean | Promise<boolean>;
       };
@@ -1171,7 +1171,7 @@ export namespace MutationResolvers {
     | ((
         parent: undefined,
         args: ArgsUploadProfilePhoto,
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => File | Promise<File>)
     | {
@@ -1179,7 +1179,7 @@ export namespace MutationResolvers {
         resolve: (
           parent: undefined,
           args: ArgsUploadProfilePhoto,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => File | Promise<File>;
       };
@@ -1188,7 +1188,7 @@ export namespace MutationResolvers {
     | ((
         parent: undefined,
         args: ArgsCreateChat,
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => Chat | Promise<Chat>)
     | {
@@ -1196,7 +1196,7 @@ export namespace MutationResolvers {
         resolve: (
           parent: undefined,
           args: ArgsCreateChat,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => Chat | Promise<Chat>;
       };
@@ -1205,7 +1205,7 @@ export namespace MutationResolvers {
     | ((
         parent: undefined,
         args: ArgsLeaveChat,
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => boolean | Promise<boolean>)
     | {
@@ -1213,7 +1213,7 @@ export namespace MutationResolvers {
         resolve: (
           parent: undefined,
           args: ArgsLeaveChat,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => boolean | Promise<boolean>;
       };
@@ -1222,7 +1222,7 @@ export namespace MutationResolvers {
     | ((
         parent: undefined,
         args: ArgsMuteChat,
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => boolean | Promise<boolean>)
     | {
@@ -1230,7 +1230,7 @@ export namespace MutationResolvers {
         resolve: (
           parent: undefined,
           args: ArgsMuteChat,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => boolean | Promise<boolean>;
       };
@@ -1239,7 +1239,7 @@ export namespace MutationResolvers {
     | ((
         parent: undefined,
         args: ArgsInviteUserToChat,
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => User | Promise<User>)
     | {
@@ -1247,7 +1247,7 @@ export namespace MutationResolvers {
         resolve: (
           parent: undefined,
           args: ArgsInviteUserToChat,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => User | Promise<User>;
       };
@@ -1256,7 +1256,7 @@ export namespace MutationResolvers {
     | ((
         parent: undefined,
         args: ArgsPostFileMessage,
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => Message | Promise<Message>)
     | {
@@ -1264,7 +1264,7 @@ export namespace MutationResolvers {
         resolve: (
           parent: undefined,
           args: ArgsPostFileMessage,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => Message | Promise<Message>;
       };
@@ -1273,7 +1273,7 @@ export namespace MutationResolvers {
     | ((
         parent: undefined,
         args: ArgsPostTextMessage,
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => Message | Promise<Message>)
     | {
@@ -1281,7 +1281,7 @@ export namespace MutationResolvers {
         resolve: (
           parent: undefined,
           args: ArgsPostTextMessage,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => Message | Promise<Message>;
       };
@@ -1290,7 +1290,7 @@ export namespace MutationResolvers {
     | ((
         parent: undefined,
         args: ArgsRemoveMessage,
-        ctx: Context,
+        ctx: ServerContext,
         info: GraphQLResolveInfo
       ) => boolean | Promise<boolean>)
     | {
@@ -1298,7 +1298,7 @@ export namespace MutationResolvers {
         resolve: (
           parent: undefined,
           args: ArgsRemoveMessage,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => boolean | Promise<boolean>;
       };
@@ -1308,7 +1308,7 @@ export namespace MutationResolvers {
       | ((
           parent: undefined,
           args: ArgsSignup,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => User | Promise<User>)
       | {
@@ -1316,7 +1316,7 @@ export namespace MutationResolvers {
           resolve: (
             parent: undefined,
             args: ArgsSignup,
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => User | Promise<User>;
         };
@@ -1325,7 +1325,7 @@ export namespace MutationResolvers {
       | ((
           parent: undefined,
           args: ArgsLogin,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => User | Promise<User>)
       | {
@@ -1333,7 +1333,7 @@ export namespace MutationResolvers {
           resolve: (
             parent: undefined,
             args: ArgsLogin,
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => User | Promise<User>;
         };
@@ -1342,7 +1342,7 @@ export namespace MutationResolvers {
       | ((
           parent: undefined,
           args: {},
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => boolean | Promise<boolean>)
       | {
@@ -1350,7 +1350,7 @@ export namespace MutationResolvers {
           resolve: (
             parent: undefined,
             args: {},
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => boolean | Promise<boolean>;
         };
@@ -1359,7 +1359,7 @@ export namespace MutationResolvers {
       | ((
           parent: undefined,
           args: ArgsResetPassword,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => boolean | Promise<boolean>)
       | {
@@ -1367,7 +1367,7 @@ export namespace MutationResolvers {
           resolve: (
             parent: undefined,
             args: ArgsResetPassword,
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => boolean | Promise<boolean>;
         };
@@ -1376,7 +1376,7 @@ export namespace MutationResolvers {
       | ((
           parent: undefined,
           args: ArgsAddFriend,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => boolean | Promise<boolean>)
       | {
@@ -1384,7 +1384,7 @@ export namespace MutationResolvers {
           resolve: (
             parent: undefined,
             args: ArgsAddFriend,
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => boolean | Promise<boolean>;
         };
@@ -1393,7 +1393,7 @@ export namespace MutationResolvers {
       | ((
           parent: undefined,
           args: ArgsRemoveFriend,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => boolean | Promise<boolean>)
       | {
@@ -1401,7 +1401,7 @@ export namespace MutationResolvers {
           resolve: (
             parent: undefined,
             args: ArgsRemoveFriend,
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => boolean | Promise<boolean>;
         };
@@ -1410,7 +1410,7 @@ export namespace MutationResolvers {
       | ((
           parent: undefined,
           args: ArgsBlockUser,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => boolean | Promise<boolean>)
       | {
@@ -1418,7 +1418,7 @@ export namespace MutationResolvers {
           resolve: (
             parent: undefined,
             args: ArgsBlockUser,
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => boolean | Promise<boolean>;
         };
@@ -1427,7 +1427,7 @@ export namespace MutationResolvers {
       | ((
           parent: undefined,
           args: ArgsUploadProfilePhoto,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => File | Promise<File>)
       | {
@@ -1435,7 +1435,7 @@ export namespace MutationResolvers {
           resolve: (
             parent: undefined,
             args: ArgsUploadProfilePhoto,
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => File | Promise<File>;
         };
@@ -1444,7 +1444,7 @@ export namespace MutationResolvers {
       | ((
           parent: undefined,
           args: ArgsCreateChat,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => Chat | Promise<Chat>)
       | {
@@ -1452,7 +1452,7 @@ export namespace MutationResolvers {
           resolve: (
             parent: undefined,
             args: ArgsCreateChat,
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => Chat | Promise<Chat>;
         };
@@ -1461,7 +1461,7 @@ export namespace MutationResolvers {
       | ((
           parent: undefined,
           args: ArgsLeaveChat,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => boolean | Promise<boolean>)
       | {
@@ -1469,7 +1469,7 @@ export namespace MutationResolvers {
           resolve: (
             parent: undefined,
             args: ArgsLeaveChat,
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => boolean | Promise<boolean>;
         };
@@ -1478,7 +1478,7 @@ export namespace MutationResolvers {
       | ((
           parent: undefined,
           args: ArgsMuteChat,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => boolean | Promise<boolean>)
       | {
@@ -1486,7 +1486,7 @@ export namespace MutationResolvers {
           resolve: (
             parent: undefined,
             args: ArgsMuteChat,
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => boolean | Promise<boolean>;
         };
@@ -1495,7 +1495,7 @@ export namespace MutationResolvers {
       | ((
           parent: undefined,
           args: ArgsInviteUserToChat,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => User | Promise<User>)
       | {
@@ -1503,7 +1503,7 @@ export namespace MutationResolvers {
           resolve: (
             parent: undefined,
             args: ArgsInviteUserToChat,
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => User | Promise<User>;
         };
@@ -1512,7 +1512,7 @@ export namespace MutationResolvers {
       | ((
           parent: undefined,
           args: ArgsPostFileMessage,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => Message | Promise<Message>)
       | {
@@ -1520,7 +1520,7 @@ export namespace MutationResolvers {
           resolve: (
             parent: undefined,
             args: ArgsPostFileMessage,
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => Message | Promise<Message>;
         };
@@ -1529,7 +1529,7 @@ export namespace MutationResolvers {
       | ((
           parent: undefined,
           args: ArgsPostTextMessage,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => Message | Promise<Message>)
       | {
@@ -1537,7 +1537,7 @@ export namespace MutationResolvers {
           resolve: (
             parent: undefined,
             args: ArgsPostTextMessage,
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => Message | Promise<Message>;
         };
@@ -1546,7 +1546,7 @@ export namespace MutationResolvers {
       | ((
           parent: undefined,
           args: ArgsRemoveMessage,
-          ctx: Context,
+          ctx: ServerContext,
           info: GraphQLResolveInfo
         ) => boolean | Promise<boolean>)
       | {
@@ -1554,7 +1554,7 @@ export namespace MutationResolvers {
           resolve: (
             parent: undefined,
             args: ArgsRemoveMessage,
-            ctx: Context,
+            ctx: ServerContext,
             info: GraphQLResolveInfo
           ) => boolean | Promise<boolean>;
         };
