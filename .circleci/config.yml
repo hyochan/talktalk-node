@@ -22,8 +22,8 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package-lock.json" }}
         
-      - run: npm run check-style
+      - run: npm run format
       
-      - run: npm run test:coverage
+      - run: npm run test --coverage
 
       - run: bash <(curl -s https://codecov.io/bash)
