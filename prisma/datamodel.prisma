@@ -1,16 +1,68 @@
 type User {
-  id: ID! @unique
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   email: String! @unique
-  password: String!
-  name: String
-  photoUrl: String
-  description: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  friends: [User!]! @relation(name: "Friend")
+  passwordDigest: String!
+  passwordResetToken: String
+  fullName: String
+  photo: File
+  statusMessage: String
+  memberships: [ChatMembership!]! @relation(name: "UserToMemberships", onDelete: CASCADE)
+  relationships: [UserRelationship!]! @relation(name: "UserToRelationships", onDelete: CASCADE)
 }
 
-type AuthPayload {
-  token: String!
-  user: User!
+type UserRelationship {
+  id: ID! @id
+  type: UserRelationType!
+  fromUser: User! @relation(name: "UserToRelationships")
+  toUser: User! @relation(name: "RelationshipToUser")
+}
+
+enum UserRelationType {
+  FRIEND,
+  WAIT_APPROVAL,
+  BLOCKED
+}
+
+type Message {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  deletedAt: DateTime!
+  chat: Chat! @relation(name: "ChatToMessages", onDelete: CASCADE)
+  author: User!
+  type: MessageType!
+  text: String
+  attachment: File
+}
+
+enum MessageType {
+  SYSTEM,
+  TEXT,
+  FILE
+}
+
+type Chat {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  members: [ChatMembership!]! @relation(name: "ChatToMemberships")
+  messages: [Message!] @relation(name: "ChatToMessages")
+}
+
+type ChatMembership {
+  id: ID! @id
+  chat: Chat! @relation(name: "ChatToMemberships")
+  user: User! @relation(name: "UserToMemberships")
+  isMuted: Boolean! @default(value: false)
+}
+
+type File {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  contentType: String!
+  size: Int!
+  fileName: String!
 }

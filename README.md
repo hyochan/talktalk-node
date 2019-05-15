@@ -1,28 +1,26 @@
-Welcome to the talktalk-node wiki!
-# talktalk-node
-[![codecov](https://codecov.io/gh/dooboolab/talktalk-node/branch/master/graph/badge.svg)](https://codecov.io/gh/dooboolab/talktalk-node)
-[![CircleCI](https://circleci.com/gh/dooboolab/talktalk-node.svg?style=svg)](https://circleci.com/gh/dooboolab/talktalk-node) [![Greenkeeper badge](https://badges.greenkeeper.io/dooboolab/talktalk-node.svg)](https://greenkeeper.io/)
+# TalkTalk Server
 
-This is backend application for talktalk built in [react-native](https://github.com/facebook/react-native).
-TalkTalk is an opensource chat app under construction.
+[![codecov](https://codecov.io/gh/dooboolab/talktalk-node/branch/master/graph/badge.svg)](https://codecov.io/gh/dooboolab/talktalk-node) [![CircleCI](https://circleci.com/gh/dooboolab/talktalk-node.svg?style=svg)](https://circleci.com/gh/dooboolab/talktalk-node) [![Greenkeeper badge](https://badges.greenkeeper.io/dooboolab/talktalk-node.svg)](https://greenkeeper.io/)
+
+This is server application for TalkTalk, the open source chat app built on top of [React Native](https://github.com/facebook/react-native).
 
 ## Specification
-You need to know about below techniques in able to understand the server specifications comfortably.
-* [Prisma](https://www.prisma.io/)
-* [Graphql](https://graphql.org/)
-* [babeljs](https://babeljs.io/)
-* [nodejs](https://nodejs.org/)
-* [docker](https://www.docker.com/)
-* [docker-compose](https://docs.docker.com/compose/)
-* [mysql](https://www.mysql.com/)
-* [azure-storage](https://azure.microsoft.com/en-us/services/storage/)
 
-## Version
+You need to know about below techniques in able to understand the server specifications comfortably.
+
+* [Prisma](https://www.prisma.io/)
+* [GraphQL](https://graphql.org/)
+* [Node.js](https://nodejs.org/)
+* [Docker](https://www.docker.com/)
+* [docker-compose](https://docs.docker.com/compose/)
+* [Azure Storage](https://azure.microsoft.com/en-us/services/storage/)
+
+## Versions
+
 The version listed is used in current environment. This must not be identical to your environment.
 
 | Tool                  | Version      |
 | --------------------- | ------------ |
-| babeljs               | 7+           |
 | nodejs                | 10+          |
 | npm                   | 6.4+         |
 | prisma                | 1.2+         |
@@ -33,32 +31,18 @@ The version listed is used in current environment. This must not be identical to
 ## Setting up talktalk-node
 
 ### Install Docker Desktop
-##### Download Links : *This step requires Sign in (or Sign Up) to DockerHub*
-- [Docker Desktop(Mac)](https://store.docker.com/editions/community/docker-ce-desktop-mac)
-- [Docker Desktop(Windows)](https://hub.docker.com/editions/community/docker-ce-desktop-windows)
+
+* [Docker Desktop(Mac)](https://store.docker.com/editions/community/docker-ce-desktop-mac)
+* [Docker Desktop(Windows)](https://hub.docker.com/editions/community/docker-ce-desktop-windows)
   
 ### Install the Prisma CLI
-- [Document: Set up Prisma](https://www.prisma.io/docs/get-started/01-setting-up-prisma-new-database-JAVASCRIPT-a002/)
 
-    ```
-    npm install -g prisma
-    
-    or
-    
-    brew tap prisma/prisma
-    brew install prisma
+* [Document: Set up Prisma](https://www.prisma.io/docs/get-started/01-setting-up-prisma-new-database-JAVASCRIPT-a002/)  
+
+    ```bash
+    yarn global add prisma
     ```
 
-    **`Caution`: prisma installation via npm recommended.**  
-    
-    ```
-    Error: Cannot find module 'generate'
-    ```
-    - when you execute *local test* via `prisma deploy` command at **post-deploy hook setting** in `prisma.yml`, this error occured in prisma *Homebrew installation*.
-    - that error not fixed in *Homebrew installation* yet.
-    - **so install via npm**
-    - [GitHub issues: Error: Cannot find module 'generate'](https://github.com/prisma/Mongo-Connector-Preview/issues/1#issuecomment-441361867)
-   
 ### Running server
 
 First of all, run `cp .env.sample .env` to generate environment file.
@@ -68,16 +52,19 @@ Basically you need to change nothing but only `JWT_SECRET` with any value for lo
 | Name                         | Description               | required? | default               |
 |:-----------------------------|:------------------------- | --------- | --------------------- |
 | JWT_SECRET                   | Secret key to enc/dec JWT | true      |                       |
-| PW_RESET_KEY                 | Encrypting key for resetting password  | true      |  |
-| CS_EMAIL_ADDRESS             | Bot email address         | true      |                       |
-| CS_EMAIL_PASSWORD            | Bot email password        | true      |                       |
-| PRODUCTION_END_POINT         | Production server url     | false     |                       |
-| DEBUG                        | Flag to enable debug mode |           | false                 |
-| PRISMA_ENDPOINT              | Prisma endpoint URL       | true      | http://localhost:4466 |
-| PRISMA_MANAGEMENT_API_SECRET | Prisma service secret, required for production | false |  |
+| CS_EMAIL_ADDRESS             | Noreply email address     | false     |                       |
+| SMTP_SERVICE                 | SMTP service provider     | false     |                       |
+| SMTP_HOST                    | SMTP service host         | false     |                       |
+| SMTP_PORT                    | SMTP service port         | false     |                       |
+| SMTP_USER                    | User for SMTP authentication       | false |                  |
+| SMTP_PASSWORD                | Password for SMTP authentication       | false |              |
+| PRISMA_ENDPOINT              | Prisma endpoint port      | true      | 4466 |
+| PRISMA_PORT                  | Prisma endpoint URL       | true      | http://localhost:4466 |
+| PRISMA_MANAGEMENT_API_SECRET | [Prisma Management API secret](https://www.prisma.io/docs/prisma-server/authentication-and-security-kke4/#prisma-server), required for production | false |  |
+| PRISMA_SECRET                | [Prisma service secret](https://www.prisma.io/docs/prisma-server/authentication-and-security-kke4/#prisma-services), required for production | false |  |
 | PRISMA_DB_CONNECTOR          | Database connector        | true      | mysql                 |
 | PRISMA_DB_DATABASE           | Database name             | false     | prisma                |
-| MY_SQL_ROOT_PASSWORD         | Database root password    | false     | prisma                |
+| PRISMA_DB_PASSWORD           | Database root password    | false     | prisma                |
 
 Start with below steps,
 
@@ -87,12 +74,15 @@ Start with below steps,
 2. `prisma deploy`  
    Initialize or apply changes of prisma data model to database.
 
-3. `npm start`  
+3. `yarn start`  
    Start Express.js server to provide GraphQL API
 
 ## Applying schema to database
+
 * If you've edited `prisma/datamodel.prisma`, you must `prisma deploy` in order to apply changes to database.
 
 ## More details
-- [LICENSE](https://github.com/dooboolab/talktalk-node/blob/master/LICENSE)
-- [CONTRIBUTION](https://github.com/dooboolab/talktalk-node/blob/master/CONTRIBUTING.md)
+
+* [LICENSE](https://github.com/dooboolab/talktalk-node/blob/master/LICENSE)
+
+* [CONTRIBUTION](https://github.com/dooboolab/talktalk-node/blob/master/CONTRIBUTING.md)
