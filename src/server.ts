@@ -7,10 +7,12 @@ import { resolvers } from 'resolvers';
 import { createAuthMiddleware } from 'middlewares';
 import { emailRouter } from 'routers';
 
-import {
+require('dotenv').config();
+
+const {
   SERVER_PORT,
   JWT_SECRET,
-} from 'dotenv.macro';
+} = process.env;
 
 const server = new GraphQLServer({
   typeDefs: path.join(__dirname, 'schema.graphql'),

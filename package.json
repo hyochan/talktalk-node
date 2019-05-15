@@ -6,14 +6,15 @@
   "private": true,
   "scripts": {
     "generate": "graphqlgen",
-    "build": "babel -d build --extensions .ts src",
-    "start": "npm run build && node build/server.js",
+    "build": "tsc",
+    "start": "ts-node -r tsconfig-paths/register src/server.ts",
+    "start:dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpileOnly src/server.ts",
     "format": "eslint --quiet src/**/*.ts",
     "format:fix": "eslint --fix --quiet src/**/*.ts",
     "test": "jest"
   },
   "dependencies": {
-    "aes256": "^1.0.4",
+    "bcrypt": "^3.0.5",
     "dotenv": "^8.0.0",
     "ejs": "^2.6.1",
     "express-async-handler": "^1.1.4",
@@ -24,24 +25,12 @@
     "prisma-client-lib": "^1.31.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.3",
-    "@babel/core": "^7.4.3",
-    "@babel/plugin-proposal-class-properties": "^7.4.0",
-    "@babel/plugin-proposal-json-strings": "^7.2.0",
-    "@babel/preset-env": "^7.4.3",
-    "@babel/preset-typescript": "^7.3.3",
     "@types/ejs": "^2.6.3",
     "@types/jest": "^24.0.12",
     "@types/jsonwebtoken": "^8.3.2",
     "@types/node": "^11.13.8",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^10.0.1",
-    "babel-jest": "^24.7.1",
-    "babel-plugin-macros": "^2.5.1",
-    "babel-plugin-module-resolver": "^3.2.0",
-    "dotenv.macro": "^1.0.0",
     "eslint": "^5.16.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.17.2",
@@ -50,6 +39,10 @@
     "eslint-plugin-standard": "^4.0.0",
     "graphqlgen": "^0.6.0-rc9",
     "jest": "^24.7.1",
+    "ts-jest": "^24.0.2",
+    "ts-node": "^8.1.0",
+    "ts-node-dev": "^1.0.0-pre.32",
+    "tsconfig-paths": "^3.8.0",
     "typescript": "^3.4.4"
   }
 }

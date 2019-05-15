@@ -2,28 +2,19 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "esModuleInterop": true,
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
+    "lib": ["es2016", "esnext"],
+    "outDir": "build",
+    "skipLibCheck": true,
     "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "noEmit": true,
-    "lib": ["es2016", "esnext"],
-    "baseUrl": ".",
-    "paths": {
-      "*": [
-        "node_modules/*",
-        "src/*"
-      ]
-    },
-    "types": [
-      "node_modules/@types/*",
-      "src/env.d.ts"
-    ]
+    "baseUrl": "src"
   },
   "include": [
-    "src"
+    "./src/**/*"
   ]
 }
