@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 import { ServerContext, ServerJWT } from 'types';
 
-export function createAuthMiddleware(appSecret?: string): IMiddleware<any, ServerContext> {
+export function createAuthMiddleware (appSecret?: string): IMiddleware<any, ServerContext> {
   if (!appSecret) {
     throw new Error('The secret to encrypt JWT is must be provided');
   }
