@@ -40,10 +40,8 @@ The version listed is used in current environment. This must not be identical to
 * [Document: Set up Prisma](https://www.prisma.io/docs/get-started/01-setting-up-prisma-new-database-JAVASCRIPT-a002/)  
 
     ```bash
-    npm install -g prisma
+    yarn global add prisma
     ```
-
-    **`Caution`: prisma installation via npm recommended.**  
 
 ### Running server
 
@@ -76,7 +74,7 @@ Start with below steps,
 2. `prisma deploy`  
    Initialize or apply changes of prisma data model to database.
 
-3. `npm start`  
+3. `yarn start`  
    Start Express.js server to provide GraphQL API
 
 ## Applying schema to database
