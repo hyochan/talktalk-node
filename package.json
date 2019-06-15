@@ -16,7 +16,7 @@
   "dependencies": {
     "bcrypt": "^3.0.5",
     "dotenv": "^8.0.0",
-    "ejs": "^2.6.1",
+    "ejs": "^2.6.2",
     "express-async-handler": "^1.1.4",
     "graphql": "14.3.0",
     "graphql-middleware": "^3.0.2",
