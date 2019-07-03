@@ -18,7 +18,7 @@
     "dotenv": "^8.0.0",
     "ejs": "^2.6.1",
     "express-async-handler": "^1.1.4",
-    "graphql": "14.3.0",
+    "graphql": "14.4.2",
     "graphql-middleware": "^3.0.2",
     "graphql-yoga": "^1.17.4",
     "jsonwebtoken": "^8.5.1",
