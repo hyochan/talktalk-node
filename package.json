@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@types/ejs": "^2.6.3",
-    "@types/jest": "^24.0.12",
+    "@types/jest": "^24.0.18",
     "@types/jsonwebtoken": "^8.3.2",
     "@types/node": "^11.13.8",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
