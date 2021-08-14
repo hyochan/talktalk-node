@@ -1,4 +1,6 @@
-# TalkTalk Server
+> Transferred to [HackaTalk](https://github.com/dooboolab/hackatalk)
+
+# TalkTalk Server (Deprecated!)
 
 [![codecov](https://codecov.io/gh/dooboolab/talktalk-node/branch/master/graph/badge.svg)](https://codecov.io/gh/dooboolab/talktalk-node) [![CircleCI](https://circleci.com/gh/dooboolab/talktalk-node.svg?style=svg)](https://circleci.com/gh/dooboolab/talktalk-node) [![Greenkeeper badge](https://badges.greenkeeper.io/dooboolab/talktalk-node.svg)](https://greenkeeper.io/)
 
